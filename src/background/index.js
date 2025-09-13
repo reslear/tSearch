@@ -2,7 +2,6 @@ import {autorun} from "mobx";
 import OptionsStore from "../stores/OptionsStore";
 import getLogger from "../tools/getLogger";
 import TrackerStore, {TrackerOptionsStore} from "../stores/TrackerStore";
-import {fetch} from 'whatwg-fetch'
 import getTrackerCodeMeta from "../tools/getTrackerCodeMeta";
 import {destroy} from "mobx-state-tree";
 import {ErrorWithCode} from "../tools/errors";
@@ -18,7 +17,7 @@ import getUserId from "../tools/getUserId";
 import jsonCodeToUserscript from "../tools/jsonCodeToUserscript";
 import setCodeMeta from "../tools/setCodeMeta";
 
-errorTracker.bindExceptions();
+// Do not bind global error handlers in service worker context
 
 const promiseLimit = require('promise-limit');
 const qs = require('querystring');
@@ -124,14 +123,14 @@ chrome.runtime.onMessage.addListener(function (message, sender, response) {
 
 const updateIcon = (invertIcon) => {
   if (invertIcon) {
-    chrome.browserAction.setIcon({
+    chrome.action.setIcon({
       path: {
         19: 'assets/icons/icon_19_i.png',
         38: 'assets/icons/icon_38_i.png'
       }
     });
   } else {
-    chrome.browserAction.setIcon({
+    chrome.action.setIcon({
       path: {
         19: 'assets/icons/icon_19.png',
         38: 'assets/icons/icon_38.png'
@@ -161,17 +160,17 @@ chrome.contextMenus.onClicked.addListener((info) => {
 
 const setPopupMenu = (disablePopup) => {
   if (disablePopup) {
-    chrome.browserAction.setPopup({
+    chrome.action.setPopup({
       popup: ''
     });
   } else {
-    chrome.browserAction.setPopup({
+    chrome.action.setPopup({
       popup: 'popup.html'
     });
   }
 };
 
-chrome.browserAction.onClicked.addListener(() => {
+chrome.action.onClicked.addListener(() => {
   chrome.tabs.create({
     url: 'index.html'
   });

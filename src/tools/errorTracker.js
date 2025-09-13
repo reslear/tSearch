@@ -49,13 +49,25 @@ class ErrorTracker {
   };
 
   bindExceptions() {
-    window.addEventListener('error', this._handleUncaughtException);
-    window.addEventListener('unhandledrejection', this._handleUnhandledRejection);
+    const target = (typeof window !== 'undefined' && window.addEventListener)
+      ? window
+      : (typeof self !== 'undefined' && typeof self.addEventListener === 'function')
+        ? self
+        : null;
+    if (!target) return;
+    target.addEventListener('error', this._handleUncaughtException);
+    target.addEventListener('unhandledrejection', this._handleUnhandledRejection);
   }
 
   unbindExceptions() {
-    window.removeEventListener('error', this._handleUncaughtException);
-    window.removeEventListener('unhandledrejection', this._handleUnhandledRejection);
+    const target = (typeof window !== 'undefined' && window.removeEventListener)
+      ? window
+      : (typeof self !== 'undefined' && typeof self.removeEventListener === 'function')
+        ? self
+        : null;
+    if (!target) return;
+    target.removeEventListener('error', this._handleUncaughtException);
+    target.removeEventListener('unhandledrejection', this._handleUnhandledRejection);
   }
 
   /**
@@ -70,10 +82,11 @@ class ErrorTracker {
   }
 
   updateRenameMap() {
+    if (typeof document === 'undefined') return [];
     return Array.from(document.querySelectorAll('script:not([data-rename-matched])')).map(script => {
       script.dataset.renameMatched = 'true';
-      const srcReStr = this._escapeRegExp(script.src);
-      this.renameMap.push([new RegExp(srcReStr, 'g'), path.basename(script.src)]);
+      const srcReStr = this._escapeRegExp(script.src || '');
+      this.renameMap.push([new RegExp(srcReStr, 'g'), path.basename(script.src || '')]);
     });
   }
 

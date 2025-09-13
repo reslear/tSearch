@@ -9,7 +9,8 @@ global.BUILD_ENV = {
   distName: `tms-${version}`,
   outputPath: path.join(__dirname, '../dist/'),
   mode: mode,
-  devtool: mode === 'development' ? 'source-map' : 'none',
+  // Always generate source maps for easier debugging
+  devtool: 'source-map',
   version: version,
   babelEnvOptions: {
     targets: {

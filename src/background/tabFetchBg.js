@@ -303,16 +303,19 @@ class Request extends Events {
       const {origin: urlOrigin} = new URL(this.url);
       const isSameOrigin = urlOrigin === originTabOrigin;
 
-      return executeScriptPromise(this.originTab.tabId, {
-        code: `(${function (id, url, options, isSameOrigin) {
+      return chrome.scripting.executeScript({
+        target: {tabId: this.originTab.tabId},
+        func: function (id, url, options, isSameOrigin) {
           try {
+            // Run in page context
             window.tabFetch(id, url, options, isSameOrigin);
             return {result: true};
           } catch (err) {
             return {error: {message: err.message, stack: err.stack}};
           }
-        }})(${strArgs(this.id, this.url, this.options, isSameOrigin)})`,
-        runAt: 'document_start',
+        },
+        args: [this.id, this.url, this.options, isSameOrigin],
+        injectImmediately: true,
       }).then(results => results[0]);
     }).then((result) => {
       if (sessionId !== this.sessionIndex) return;
@@ -342,15 +345,17 @@ class Request extends Events {
   abort(reason) {
     DEBUG && logger.debug('Request abort', this.id);
     if (this.state === 'pending') {
-      executeScriptPromise(this.originTab.tabId, {
-        code: `(${function (id) {
+      chrome.scripting.executeScript({
+        target: {tabId: this.originTab.tabId},
+        func: function (id) {
           try {
             window.tabFetchAbort(id);
           } catch (err) {
-            logger.error('tabFetchAbort error', err);
+            // best-effort abort
           }
-        }})(${strArgs(this.id)})`,
-        runAt: 'document_start',
+        },
+        args: [this.id],
+        injectImmediately: true,
       });
     }
     this.handleReject(reason || new Error('Aborted'));
@@ -368,11 +373,9 @@ const createPopup = (originUrl) => {
     focused: false,
     width: 120,
     height: 25,
-    left: screen.availWidth,
-    top: screen.availHeight,
     type: 'popup',
-  }, resolve)).then((window) => {
-    const tabId = window.tabs[0].id;
+  }, resolve)).then((wnd) => {
+    const tabId = wnd.tabs[0].id;
     chrome.tabs.update(tabId, {muted: true});
     return tabId;
   });
@@ -390,12 +393,27 @@ const createTab = (originUrl) => {
 };
 
 const executeScriptPromise = (tabId, options) => {
-  return new Promise((resolve, reject) => {
-    chrome.tabs.executeScript(tabId, options, (results) => {
-      const err = chrome.runtime.lastError;
-      err ? reject(err) : resolve(results);
+  // MV3: use chrome.scripting.executeScript
+  const target = {tabId};
+  if (options.file) {
+    return chrome.scripting.executeScript({
+      target,
+      files: [options.file],
+      injectImmediately: options.runAt === 'document_start'
     });
-  });
+  }
+  if (options.code) {
+    return chrome.scripting.executeScript({
+      target,
+      func: function (source) {
+        // eslint-disable-next-line no-new-func
+        return (new Function(source))();
+      },
+      args: [options.code],
+      injectImmediately: options.runAt === 'document_start'
+    }).then(injectionResults => injectionResults.map(r => r.result));
+  }
+  return Promise.reject(new Error('executeScriptPromise: no code or file'));
 };
 
 const containsPermissions = (permissions) => {

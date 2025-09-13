@@ -1,5 +1,5 @@
 require('./builder/defaultBuildEnv');
-const {DefinePlugin} = require('webpack');
+const {DefinePlugin, IgnorePlugin} = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -12,9 +12,8 @@ const mode = BUILD_ENV.mode;
 const devtool = BUILD_ENV.devtool;
 const babelEnvOptions = BUILD_ENV.babelEnvOptions;
 
-const config = {
+const uiConfig = {
   entry: {
-    bg: './src/background',
     sandbox: './src/sandbox',
     popup: './src/Popup',
     index: './src/App',
@@ -32,22 +31,9 @@ const config = {
   mode: mode,
   devtool: devtool,
   optimization: {
-    splitChunks: {
-      cacheGroups: {
-        commons: {
-          name: "commons",
-          chunks: chunk => ['bg', 'popup', 'index'].indexOf(chunk.name) !== -1,
-          minChunks: 3,
-          priority: 0
-        },
-        'commons_ui': {
-          name: "commons-ui",
-          chunks: chunk => ['popup', 'index'].indexOf(chunk.name) !== -1,
-          minChunks: 2,
-          priority: -10
-        },
-      }
-    }
+    minimize: false,
+    splitChunks: false,
+    runtimeChunk: false,
   },
   module: {
     rules: [
@@ -118,12 +104,12 @@ const config = {
     new HtmlWebpackPlugin({
       filename: 'popup.html',
       template: './src/templates/popup.html',
-      chunks: ['commons', 'commons-ui', 'popup']
+      chunks: ['popup']
     }),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: './src/templates/index.html',
-      chunks: ['commons', 'commons-ui', 'index']
+      chunks: ['index']
     }),
     /*new HtmlWebpackPlugin({
       filename: 'history.html',
@@ -150,29 +136,67 @@ const config = {
 };
 
 if (mode === 'production') {
-  config.plugins.push(
-    new OptimizeCssAssetsPlugin({
-      assetNameRegExp: /\.css$/g,
-      cssProcessor: require('cssnano'),
-      cssProcessorPluginOptions: {
-        preset: [
-          'default',
-          {discardComments: {removeAll: true}}
-        ],
-      },
-      canPrint: true
-    }),
-  );
-  Object.keys(config.entry).forEach(entryName => {
-    let value = config.entry[entryName];
-    if (!Array.isArray(value)) {
-      value = [value];
-    }
-    // value.unshift('babel-polyfill');
+  Object.keys(uiConfig.entry).forEach(entryName => {
+    let value = uiConfig.entry[entryName];
+    if (!Array.isArray(value)) value = [value];
     value.unshift('whatwg-fetch');
-
-    config.entry[entryName] = value;
+    uiConfig.entry[entryName] = value;
   });
 }
 
-module.exports = config;
+// Separate config for service worker (no window, no JSONP)
+const bgConfig = {
+  entry: {
+    bg: './src/background',
+  },
+  target: 'webworker',
+  output: {
+    path: path.join(outputPath, 'dist'),
+    filename: '[name].js',
+    chunkFilename: 'chunk-[name].js',
+  },
+  mode: mode,
+  devtool: devtool,
+  optimization: {
+    minimize: false,
+    splitChunks: false,
+    runtimeChunk: false,
+  },
+  module: {
+    rules: [
+      {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            plugins: [
+              ['@babel/plugin-proposal-decorators', {'legacy': true}],
+              '@babel/plugin-syntax-dynamic-import',
+              '@babel/plugin-proposal-class-properties'
+            ],
+            presets: [
+              '@babel/preset-react',
+              ['@babel/preset-env', babelEnvOptions]
+            ]
+          }
+        }
+      }
+    ]
+  },
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
+  plugins: [
+    new DefinePlugin({
+      'BUILD_ENV': Object.entries(BUILD_ENV).reduce((obj, [key, value]) => {
+        obj[key] = JSON.stringify(value);
+        return obj;
+      }, {}),
+    }),
+    // Strip UI-only worker helpers from the service worker bundle
+    new IgnorePlugin({ resourceRegExp: /tools\/(frameWorker|moduleWorker|trackerWorker|explorerModuleWorker|transport)\.js$/ })
+  ]
+};
+
+module.exports = [uiConfig, bgConfig];
