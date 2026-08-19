@@ -210,7 +210,7 @@ const SearchStore = types.model('SearchStore', {
 }).actions(self => {
   const urlSet = new Set();
   return {
-    searchWrapper: flow(function* (serachFn) {
+    searchWrapper: flow(function* (serachFn, retryDisabledTrackers = false) {
       if (!isAlive(self)) {
         return;
       }
@@ -227,7 +227,9 @@ const SearchStore = types.model('SearchStore', {
             return true;
           }
           const disableReason = trackerHealth.getTrackerDisableReason(trackerId);
-          if (disableReason && isRecoverableSearchError(disableReason)) {
+          // A new search started by the user retries every tracker: a stale
+          // reason stored in chrome.storage must not disable a tracker forever.
+          if (disableReason && (retryDisabledTrackers || isRecoverableSearchError(disableReason))) {
             if (trackerHealth.enableTracker(trackerId)) {
               hasRecoveredTrackers = true;
             }
@@ -274,7 +276,7 @@ const SearchStore = types.model('SearchStore', {
     search() {
       return self.searchWrapper((trackerSearch) => {
         return trackerSearch.search();
-      });
+      }, true);
     },
     searchNext() {
       return self.searchWrapper((trackerSearch) => {
