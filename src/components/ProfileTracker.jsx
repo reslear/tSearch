@@ -16,8 +16,14 @@ class ProfileTracker extends React.Component {
     return this.props.profileTrackerStore;
   }
 
+  /**@return RootStore*/
+  get rootStore() {
+    return this.props.rootStore;
+  }
+
+  /**@return SearchStore*/
   get searchStore() {
-    const searches = this.props.rootStore.searches;
+    const searches = this.rootStore.searches;
     const len = searches.length;
     if (len) {
       return searches[len - 1];
@@ -36,24 +42,45 @@ class ProfileTracker extends React.Component {
     return this.profileTrackerStore.tracker;
   }
 
+  handleHide = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    this.rootStore.profiles.removeTrackerFromActiveProfile(this.profileTrackerStore.id);
+  };
+
   render() {
     if (!this.trackerStore) {
       const name = this.profileTrackerStore.meta.name || 'Not found';
-      const trackerSearchStore = this.trackerSearchStore;
-      const disabledReason = this.props.rootStore.options.options.trackerHealth &&
-        this.props.rootStore.options.options.trackerHealth.getTrackerDisableReason(this.profileTrackerStore.id);
-      const iconTitle = trackerSearchStore && trackerSearchStore.errorReason || disabledReason || 'Not found';
+      const disabledReason = this.rootStore.options.options.trackerHealth &&
+        this.rootStore.options.options.trackerHealth.getTrackerDisableReason(this.profileTrackerStore.id);
+      const iconTitle = this.trackerSearchStore && this.trackerSearchStore.errorReason || disabledReason || 'Not found';
+      const isError = Boolean(disabledReason);
+      const classList = ['tracker'];
+      if (isError) {
+        classList.push('tracker-error');
+      }
+      const openBtn = this.profileTrackerStore.meta.trackerURL ? (
+        <a className="tracker__open" target="_blank" href={this.profileTrackerStore.meta.trackerURL}
+           title={chrome.i18n.getMessage('openInNewTab')}/>
+      ) : null;
+      const hideBtn = (
+        <a onClick={this.handleHide} className="tracker__hide button-remove" href="#hide-tracker"
+           title={chrome.i18n.getMessage('delete')}/>
+      );
+
       return (
-        <div className="tracker">
+        <div className={classList.join(' ')}>
           <div className="tracker__icon tracker__icon-error" title={iconTitle}/>
           <span className="tracker__name">{name}</span>
+          {openBtn}
+          {hideBtn}
         </div>
       );
     }
 
     return (
       <Tracker id={this.trackerStore.id} profileTrackerStore={this.profileTrackerStore}
-               trackerStore={this.trackerStore}/>
+               trackerStore={this.trackerStore} onHide={this.handleHide}/>
     );
   }
 }
@@ -65,6 +92,7 @@ class Tracker extends React.Component {
     rootStore: PropTypes.object,
     trackerStore: PropTypes.object.isRequired,
     profileTrackerStore: PropTypes.object.isRequired,
+    onHide: PropTypes.func,
   };
 
   /**@return RootStore*/
@@ -130,6 +158,16 @@ class Tracker extends React.Component {
     }
   };
 
+  handleHide = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (this.props.onHide) {
+      this.props.onHide(e);
+      return;
+    }
+    this.rootStore.profiles.removeTrackerFromActiveProfile(this.trackerStore.id);
+  };
+
   render() {
     const tracker = this.trackerStore;
 
@@ -165,6 +203,8 @@ class Tracker extends React.Component {
     }
 
     let searchState = null;
+    const isError = this.isTrackerDisabled || (trackerSearchStore && !trackerSearchStore.authRequired && trackerSearchStore.state === 'error');
+
     if (trackerSearchStore) {
       if (trackerSearchStore.authRequired) {
         searchState = (
@@ -200,9 +240,21 @@ class Tracker extends React.Component {
     const iconUrl = tracker.getIconUrl() || blankSvg;
 
     const classList = ['tracker'];
+    if (isError) {
+      classList.push('tracker-error');
+    }
     if (this.rootStore.profiles.isSelectedTracker(tracker.id)) {
       classList.push('tracker-selected');
     }
+
+    const openBtn = tracker.meta.trackerURL ? (
+      <a className="tracker__open" target="_blank" href={tracker.meta.trackerURL}
+         title={chrome.i18n.getMessage('openInNewTab')}/>
+    ) : null;
+    const hideBtn = (
+      <a onClick={this.handleHide} className="tracker__hide button-remove" href="#hide-tracker"
+         title={chrome.i18n.getMessage('delete')}/>
+    );
 
     return (
       <div className={classList.join(' ')}>
@@ -210,7 +262,9 @@ class Tracker extends React.Component {
         <a className="tracker__name" href={'#' + tracker.id}
            onClick={this.handleClick}>{tracker.meta.name}</a>
         {searchState}
-        <style>{`.${getTrackerIconClassName(tracker.id)}{background-image:url(${iconUrl})}`}</style>
+        {openBtn}
+        {hideBtn}
+        <style>{`.${getTrackerIconClassName(tracker.id)}{background-image:url(${iconUrl})`}</style>
       </div>
     );
   }

@@ -586,6 +586,54 @@ a.simple_select__menu__item {
   font-weight: bold;
 }
 
+.tracker.tracker-error .tracker__name,
+.tracker.tracker-error .tracker__counter,
+.tracker.tracker-error .tracker__counter-error {
+  color: #c62828;
+}
+
+.tracker .tracker__hide {
+  width: 16px;
+  height: 16px;
+  display: block;
+  background: url(../img/delete.svg) center no-repeat;
+  background-size: 12px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s;
+}
+
+.tracker:hover .tracker__hide {
+  opacity: 0.5;
+  pointer-events: auto;
+}
+
+.tracker .tracker__hide:hover {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.tracker .tracker__open {
+  width: 16px;
+  height: 16px;
+  display: block;
+  background: url(../img/external.svg) center no-repeat;
+  background-size: 12px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s;
+}
+
+.tracker:hover .tracker__open {
+  opacity: 0.5;
+  pointer-events: auto;
+}
+
+.tracker .tracker__open:hover {
+  opacity: 1;
+  pointer-events: auto;
+}
+
 .tracker .tracker__counter.counter-hidden {
   display: none;
 }

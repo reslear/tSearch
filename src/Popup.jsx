@@ -27,8 +27,12 @@ class Popup extends React.Component {
   render() {
     return (
       <div className="search">
+        <div className="search__header">
+          <span className="search__icon"/>
+          <span className="search__title">{chrome.i18n.getMessage('extName')}</span>
+          <BuildMeta/>
+        </div>
         <SearchForm onSubmit={this.handleSubmit}/>
-        <BuildMeta/>
       </div>
     );
   }

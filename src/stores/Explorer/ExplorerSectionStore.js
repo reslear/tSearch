@@ -1,6 +1,7 @@
 import {applyPatch, flow, getParentOfType, isAlive, resolveIdentifier, types} from "mobx-state-tree";
 import ExplorerModuleStore from "./ExplorerModuleStore";
 import getLogger from "../../tools/getLogger";
+import {getErrorLogger} from "../../tools/errorLogger";
 import ExplorerItemStore from "./ExplorerItemStore";
 import RootStore from "../RootStore";
 import ExplorerCommandStore from "./ExplorerCommandStore";
@@ -11,6 +12,33 @@ import promiseFinally from "../../tools/promiseFinally";
 const logger = getLogger('ExplorerSectionStore');
 
 const cache = new ExplorerCache();
+
+/**
+ * Check if error is a network/external error, not an extension bug
+ */
+const isNetworkError = (error) => {
+  if (!error) {
+    return false;
+  }
+
+  const errorMessage = String(error.message || error).toLowerCase();
+  const statusCode = error.statusCode || error.status;
+
+  // Network errors
+  if (errorMessage.indexOf('failed to fetch') !== -1 ||
+    errorMessage.indexOf('request is blocked') !== -1 ||
+    errorMessage.indexOf('statuscodeerror') !== -1 ||
+    errorMessage.indexOf('this function must be called during a user gesture') !== -1) {
+    return true;
+  }
+
+  // HTTP error codes
+  if (statusCode === 403 || statusCode === 404 || statusCode === 503) {
+    return true;
+  }
+
+  return false;
+};
 
 /**
  * @typedef {{}} ExplorerSectionStore
@@ -96,7 +124,15 @@ const ExplorerSectionStore = types.model('ExplorerSectionStore', {
             self.setAuthRequired({url: err.url});
           }
         } else {
-          logger.error('fetch error', id, err);
+          // Only log actual extension errors, not network issues
+          if (!isNetworkError(err)) {
+            logger.error('fetch error', id, err);
+            // Log to error logger for debugging
+            getErrorLogger().error('ExplorerSectionStore', err, {
+              sectionId: id,
+              moduleId: self.moduleId,
+            });
+          }
         }
         if (isAlive(stateStore)) {
           stateStore.setState('error');

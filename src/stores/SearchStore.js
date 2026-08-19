@@ -1,5 +1,6 @@
 import {flow, getParentOfType, isAlive, resolveIdentifier, types} from 'mobx-state-tree';
 import getLogger from "../tools/getLogger";
+import {getErrorLogger} from "../tools/errorLogger";
 import RootStore from "./RootStore";
 import TrackerStore from "./TrackerStore";
 import highlight from "../tools/highlight";
@@ -110,6 +111,12 @@ const TrackerSearchStore = types.model('TrackerSearchStore', {
           }
         } else {
           logger.error(`[${id}] searchWrapper error`, err);
+          // Log to error logger for debugging
+          getErrorLogger().error('SearchStore', err, {
+            trackerId: id,
+            query: getParentOfType(self, SearchStore).query,
+            errorMessage,
+          });
           if (isAlive(self) && trackerHealth && trackerHealth.disableTracker(id, errorMessage)) {
             rootStore.options.save();
           }
@@ -455,6 +462,16 @@ const isRecoverableSearchError = (error) => {
   const errorCode = String(error.code || '').toUpperCase();
 
   if (['EMPTY_RESULT', 'EABORT', 'ABORTED'].indexOf(errorCode) !== -1) {
+    return true;
+  }
+
+  // Network errors - not extension bugs
+  if (errorMessage.indexOf('failed to fetch') !== -1 ||
+    errorMessage.indexOf('request is blocked') !== -1 ||
+    errorMessage.indexOf('403') !== -1 ||
+    errorMessage.indexOf('404') !== -1 ||
+    errorMessage.indexOf('statuscodeerror') !== -1 ||
+    errorMessage.indexOf('this function must be called during a user gesture') !== -1) {
     return true;
   }
 

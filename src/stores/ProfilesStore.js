@@ -84,6 +84,21 @@ const ProfilesStore = types.model('ProfilesStore', {
     clearSelectedTrackers() {
       self.selectedTrackerIds = [];
     },
+    removeTrackerFromActiveProfile(id) {
+      const profile = self.profile;
+      if (!profile) {
+        return;
+      }
+
+      const pos = profile.trackers.findIndex(tracker => tracker.id === id);
+      if (pos === -1) {
+        return;
+      }
+
+      profile.trackers.splice(pos, 1);
+      self.selectedTrackerIds = self.selectedTrackerIds.filter((selectedId) => selectedId !== id);
+      this.saveProfiles();
+    },
     patchProfiles(patch) {
       applyPatch(self.profiles, patch);
     },

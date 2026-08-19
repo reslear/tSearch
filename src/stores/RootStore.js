@@ -11,6 +11,7 @@ import TrackersStore from "./TrackersStore";
 import EditorStore from "./EditorStore";
 import CodeMakerStore from "./CodeMakerStore";
 import PageStore from "./PageStore";
+import LoggerStore from "./LoggerStore";
 import storageGet from "../tools/storageGet";
 import getNow from "../tools/getNow";
 import storageSet from "../tools/storageSet";
@@ -36,6 +37,7 @@ let searchId = 0;
  * @property {EditorStore|undefined|null} editor
  * @property {CodeMakerStore|undefined|null} codeMaker
  * @property {PageStore} [page]
+ * @property {LoggerStore} [logger]
  * @property {function} createSearch
  * @property {function} destroySearch
  * @property {function} createProfileEditor
@@ -61,6 +63,7 @@ const RootStore = types.model('RootStore', {
   editor: types.maybeNull(EditorStore),
   codeMaker: types.maybeNull(CodeMakerStore),
   page: types.optional(PageStore, {}),
+  logger: types.optional(LoggerStore, {}),
 }).actions(/**RootStore*/self => {
   return {
     createSearch(query) {

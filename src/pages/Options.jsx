@@ -7,6 +7,7 @@ import {Link} from "react-router-dom";
 import {inject, observer} from "mobx-react";
 import getTitle from "../tools/getTitle";
 import promiseFinally from "../tools/promiseFinally";
+import LogsPage from "./LogsPage";
 
 
 @inject('rootStore')
@@ -113,6 +114,10 @@ class Options extends React.Component {
         );
         break;
       }
+      case 'logs': {
+        page = <LogsPage/>;
+        break;
+      }
     }
 
     return (
@@ -123,6 +128,7 @@ class Options extends React.Component {
             <Link to="/options/main" className="sections__item" data-page="basic">{chrome.i18n.getMessage('basic')}</Link>
             <Link to="/options/explorer" className="sections__item" data-page="mainPage">{chrome.i18n.getMessage('mainPage')}</Link>
             <Link to="/options/backup" className="sections__item" data-page="backup">{chrome.i18n.getMessage('backupRestore')}</Link>
+            <Link to="/options/logs" className="sections__item" data-page="logs">Logs</Link>
           </div>
           <div className="options">
             {page}
