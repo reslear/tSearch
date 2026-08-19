@@ -17,12 +17,6 @@ const buildEnv = (mode: string) => {
     devtool: 'source-map',
     version: manifest.version,
     buildTime,
-    babelEnvOptions: {
-      targets: {
-        chrome: mode === 'development' ? '71' : '49',
-      },
-      useBuiltIns: mode === 'development' ? false : 'usage',
-    },
     FLAG_ENABLE_LOGGER: true,
   };
 };
