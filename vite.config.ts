@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react';
 import { crx } from '@crxjs/vite-plugin';
 import zip from 'vite-plugin-zip-pack';
 import { resolve } from 'node:path';
-import manifestConfig from './manifest.config';
+import manifestConfig from './manifest.config.ts';
 
 const manifest = manifestConfig as any;
 
@@ -116,7 +116,7 @@ export default defineConfig(({ mode }) => {
         include: [/src/, /node_modules/],
         transformMixedEsModules: true,
       },
-      rollupOptions: {
+      rolldownOptions: {
         output: {
           chunkFileNames: 'chunk-[name].js',
         },
