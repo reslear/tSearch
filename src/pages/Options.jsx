@@ -132,7 +132,8 @@ class Options extends React.Component {
             {page}
           </div>
           <div className="author">
-            <a href="https://github.com/Feverqwe/tSearch">tSearch</a> by Anton, 2016 &amp; fork reslear, 2026
+            <div><a href="https://github.com/Feverqwe/tSearch">tSearch</a> by Anton, 2016</div>
+            <div><a href="https://github.com/reslear/tSearch-manifestv3">fork</a> by reslear, 2026</div>
           </div>
         </div>
         <ScrollTop/>
