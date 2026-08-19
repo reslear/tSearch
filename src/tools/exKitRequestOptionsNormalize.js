@@ -1,6 +1,4 @@
-import {Headers} from "whatwg-fetch";
-
-const qs = require('querystring');
+import qs from './query-string';
 
 const exKitRequestOptionsNormalize = options => {
   if (typeof options !== 'object') {

@@ -5,8 +5,7 @@ import TrackerStore from "../stores/TrackerStore";
 import {destroy} from "mobx-state-tree";
 import storageGet from "./storageGet";
 import storageSet from "./storageSet";
-
-const compareVersions = require('compare-versions');
+import compareVersions from 'compare-versions';
 
 const logger = getLogger('getTrackers');
 

@@ -1,13 +1,40 @@
 import promiseFinally from "../tools/promiseFinally";
 import debounce from "lodash.debounce";
 import getLogger from "../tools/getLogger";
-
-const deserializeError = require('deserialize-error');
-const Events = require('events');
+import deserializeError from 'deserialize-error';
 
 const logger = getLogger('TabFetchBg');
 
 const DEBUG = false;
+
+class EventEmitter {
+  constructor() {
+    this._events = {};
+  }
+
+  on(eventName, listener) {
+    const list = this._events[eventName] || [];
+    list.push(listener);
+    this._events[eventName] = list;
+    return this;
+  }
+
+  removeListener(eventName, listener) {
+    const list = this._events[eventName];
+    if (!list) return this;
+    this._events[eventName] = list.filter(item => item !== listener);
+    return this;
+  }
+
+  emit(eventName, ...args) {
+    const list = this._events[eventName];
+    if (!list) return false;
+    list.slice().forEach(listener => {
+      listener(...args);
+    });
+    return true;
+  }
+}
 
 class TabFetchBg {
   constructor() {
@@ -246,7 +273,7 @@ class OriginTab {
   }
 }
 
-class Request extends Events {
+class Request extends EventEmitter {
   constructor(tabFetchBg, originTab, id, url, options) {
     super();
 

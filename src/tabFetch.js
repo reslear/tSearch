@@ -1,9 +1,6 @@
-import {fetch} from 'whatwg-fetch';
-import 'abortcontroller-polyfill/dist/abortcontroller-polyfill-only';
 import {StatusCodeError} from "./tools/errors";
 import arrayBufferToBase64 from "./tools/arrayBufferToBase64";
-
-const serializeError = require('serialize-error');
+import serializeError from 'serialize-error';
 
 !window.tabFetch && (() => {
   const idController = new Map();

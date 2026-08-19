@@ -1,7 +1,6 @@
 import getLogger from "./getLogger";
 import tracker from "./tracker";
-
-const path = require('path');
+import {BUILD_ENV} from './buildEnv';
 
 const logger = getLogger('errorTrackerUi');
 
@@ -86,7 +85,7 @@ class ErrorTracker {
     return Array.from(document.querySelectorAll('script:not([data-rename-matched])')).map(script => {
       script.dataset.renameMatched = 'true';
       const srcReStr = this._escapeRegExp(script.src || '');
-      this.renameMap.push([new RegExp(srcReStr, 'g'), path.basename(script.src || '')]);
+      this.renameMap.push([new RegExp(srcReStr, 'g'), getScriptFilename(script.src || '')]);
     });
   }
 
@@ -127,6 +126,11 @@ class ErrorTracker {
     return str;
   }
 }
+
+const getScriptFilename = (src) => {
+  const parts = src.split('?')[0].split('/');
+  return parts[parts.length - 1];
+};
 
 const errorTracker = new ErrorTracker();
 

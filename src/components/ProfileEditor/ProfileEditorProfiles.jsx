@@ -4,9 +4,8 @@ import PropTypes from "prop-types";
 import {Link, withRouter} from "react-router-dom";
 import getLogger from "../../tools/getLogger";
 import getTitle from "../../tools/getTitle";
-
-const uuid = require('uuid/v4');
-const Sortable = require('sortablejs');
+import {v4 as uuid} from "uuid";
+import Sortable from 'sortablejs';
 
 const logger = getLogger('ProfileEditorProfiles');
 

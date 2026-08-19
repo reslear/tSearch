@@ -3,10 +3,9 @@ import {ErrorWithCode} from "./errors";
 import closestElement from "./closestElement";
 import getLogger from "./getLogger";
 import escapeStringRegexp from "escape-string-regexp";
+import qs from './query-string';
 
 const logger = getLogger('requestQueryDescription');
-
-const qs = require('querystring');
 
 const decodeHexChars = (text) => {
   return text.replace(/(\\x[a-zA-Z0-9]{2})/g, function(text, word) {

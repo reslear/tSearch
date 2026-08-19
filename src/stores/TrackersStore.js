@@ -4,8 +4,7 @@ import getLogger from "../tools/getLogger";
 import getTrackers from "../tools/getTrackers";
 import storageSet from "../tools/storageSet";
 import mobxCompare from "../tools/mobxCompare";
-
-const promiseLimit = require('promise-limit');
+import promiseLimit from 'promise-limit';
 
 const logger = getLogger('TrackersStore');
 const oneLimit = promiseLimit(1);

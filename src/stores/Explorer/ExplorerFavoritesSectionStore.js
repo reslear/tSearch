@@ -5,8 +5,7 @@ import storageGet from "../../tools/storageGet";
 import storageSet from "../../tools/storageSet";
 import reOrderStoreItems from "../../tools/reOrderStoreItems";
 import mobxCompare from "../../tools/mobxCompare";
-
-const promiseLimit = require('promise-limit');
+import promiseLimit from 'promise-limit';
 
 const logger = getLogger('ExplorerFavoritesSectionStore');
 const oneLimit = promiseLimit(1);

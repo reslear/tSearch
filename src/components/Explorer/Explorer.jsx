@@ -4,8 +4,7 @@ import {inject, observer} from "mobx-react/index";
 import PropTypes from "prop-types";
 import getLogger from "../../tools/getLogger";
 import ExploreSection from "./ExploreSection";
-
-const Sortable = require('sortablejs');
+import Sortable from 'sortablejs';
 
 const logger = getLogger('Explorer');
 

@@ -7,8 +7,7 @@ import PropTypes from "prop-types";
 import highlight from "../tools/highlight";
 import {Link} from "react-router-dom";
 import getTitle from "../tools/getTitle";
-
-const qs = require('querystring');
+import qs from "../tools/query-string";
 
 @inject('rootStore')
 @observer

@@ -1,7 +1,5 @@
 import TreeAdapter from "./treeAdapter";
-
-const parse5 = require('parse5');
-
+import parse5 from 'parse5';
 
 const getDoc5 = (html, location, document) => {
   const doc = parse5.parse(html, {

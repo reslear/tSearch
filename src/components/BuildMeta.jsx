@@ -1,7 +1,8 @@
 import React from 'react';
+import {BUILD_ENV} from "../tools/buildEnv";
 
 const getBuildDate = () => {
-  if (!BUILD_ENV.buildTime) {
+  if (!BUILD_ENV || !BUILD_ENV.buildTime) {
     return 'неизвестно';
   }
 

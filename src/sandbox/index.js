@@ -1,6 +1,7 @@
 import getLogger from "../tools/getLogger";
 import Transport from '../tools/transport';
 import BaseApi from './baseApi';
+import '../shims/setImmediate';
 
 const logger = getLogger('sandbox');
 

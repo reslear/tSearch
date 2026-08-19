@@ -5,8 +5,7 @@ import ExplorerItem from "./ExplorerItem";
 import getLogger from "../../tools/getLogger";
 import {Link} from "react-router-dom";
 import _debounce from "lodash.debounce";
-
-const Sortable = require('sortablejs');
+import Sortable from 'sortablejs';
 
 const logger = getLogger('ExploreSection');
 

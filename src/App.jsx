@@ -9,6 +9,7 @@ import './assets/css/build-meta.less';
 import errorTracker from "./tools/errorTracker";
 import WhenReady from "./components/WhenReady";
 import BuildMeta from './components/BuildMeta';
+import './shims/setImmediate';
 
 errorTracker.bindExceptions();
 

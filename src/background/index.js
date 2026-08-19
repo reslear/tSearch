@@ -16,13 +16,14 @@ import errorTracker from "../tools/errorTracker";
 import getUserId from "../tools/getUserId";
 import jsonCodeToUserscript from "../tools/jsonCodeToUserscript";
 import setCodeMeta from "../tools/setCodeMeta";
+import {BUILD_ENV} from "../tools/buildEnv";
+import qs from '../tools/query-string';
+import promiseLimit from 'promise-limit';
+import compareVersions from 'compare-versions';
+import serializeError from 'serialize-error';
+import '../shims/setImmediate';
 
 // Do not bind global error handlers in service worker context
-
-const promiseLimit = require('promise-limit');
-const qs = require('querystring');
-const compareVersions = require('compare-versions');
-const serializeError = require('serialize-error');
 
 const logger = getLogger('background');
 const oneLimit = promiseLimit(1);

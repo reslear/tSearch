@@ -1,5 +1,7 @@
+import trackersJson from '../trackers.json';
+
 const getTrackersJson = async () => {
-  return require('../trackers.json');
+  return trackersJson;
 };
 
 export default getTrackersJson;

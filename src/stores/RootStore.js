@@ -18,8 +18,7 @@ import {ErrorWithCode} from "../tools/errors";
 import getLogger from "../tools/getLogger";
 import tracker from "../tools/tracker";
 import AnalyticsStore from "./AnalyticsStore";
-
-const deserializeError = require('deserialize-error');
+import deserializeError from 'deserialize-error';
 
 const logger = getLogger('RootStore');
 

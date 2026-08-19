@@ -1,8 +1,7 @@
 import getNow from "./getNow";
 import storageGet from "./storageGet";
 import storageSet from "./storageSet";
-
-const promiseLimit = require('promise-limit');
+import promiseLimit from 'promise-limit';
 
 const limitOne = promiseLimit(1);
 

@@ -1,6 +1,5 @@
 import getLogger from "../tools/getLogger";
-
-const DomTreeAdapter = require('dom-treeadapter');
+import DomTreeAdapter from 'dom-treeadapter';
 
 const logger = getLogger('treeAdapter');
 

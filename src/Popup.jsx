@@ -7,10 +7,10 @@ import RootStore from "./stores/RootStore";
 import {Provider} from "mobx-react";
 import errorTracker from "./tools/errorTracker";
 import BuildMeta from './components/BuildMeta';
+import qs from "./tools/query-string";
+import './shims/setImmediate';
 
 errorTracker.bindExceptions();
-
-const qs = require('querystring');
 const rootStore = window.rootStore = RootStore.create();
 
 class Popup extends React.Component {

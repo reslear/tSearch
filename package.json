@@ -5,14 +5,13 @@
     "buildExplorersJson": "node ./builder/buildExplorersJson.js",
     "buildTrackersJson": "node ./builder/buildTrackersJson.js",
     "compress": "node ./builder/compressDist",
-    "watch": "NODE_OPTIONS=--openssl-legacy-provider webpack --mode development --watch --config webpack.config.js",
-    "build": "NODE_OPTIONS=--openssl-legacy-provider webpack --mode development --config webpack.config.js",
-    "buildRelease": "NODE_OPTIONS=--openssl-legacy-provider webpack --mode production --config webpack.config.js",
-    "release": "npm run buildExplorersJson && npm run buildTrackersJson && npm run buildRelease && npm run compress"
+    "build:vite": "vite build --mode production",
+    "watch:vite": "vite build --mode development --watch",
+    "watch": "npm run watch:vite",
+    "build": "npm run build:vite",
+    "release": "npm run buildExplorersJson && npm run buildTrackersJson && npm run build:vite && npm run compress"
   },
   "dependencies": {
-    "abortcontroller-polyfill": "^1.3.0",
-    "babel-polyfill": "^6.26.0",
     "codemirror": "^5.47.0",
     "compare-versions": "^3.4.0",
     "content-type": "^1.0.4",
@@ -52,35 +51,17 @@
     "sizzle": "^2.3.4",
     "sortablejs": "^1.9.0",
     "superstruct": "^0.6.1",
-    "uuid": "^3.3.2",
-    "whatwg-fetch": "^3.0.0"
+    "uuid": "^11.0.3"
   },
   "devDependencies": {
-    "@babel/cli": "^7.4.4",
+    "@crxjs/vite-plugin": "^2.0.0-beta.30",
+    "@vitejs/plugin-react": "^4.3.0",
     "@babel/core": "^7.4.5",
-    "@babel/node": "^7.4.5",
     "@babel/plugin-proposal-class-properties": "^7.4.4",
     "@babel/plugin-proposal-decorators": "^7.4.4",
-    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
-    "@babel/preset-env": "^7.4.5",
-    "@babel/preset-react": "^7.0.0",
-    "@babel/register": "^7.4.4",
     "archiver": "^3.0.0",
-    "babel-loader": "^8.0.6",
-    "clean-webpack-plugin": "^2.0.2",
-    "copy-webpack-plugin": "^5.0.3",
-    "css-loader": "^2.1.1",
-    "cssnano": "^4.1.10",
-    "fs-extra": "^8.0.1",
-    "html-webpack-plugin": "^3.2.0",
     "less": "^3.9.0",
-    "less-loader": "^5.0.0",
-    "mini-css-extract-plugin": "^0.7.0",
-    "optimize-css-assets-webpack-plugin": "^5.0.1",
-    "script-loader": "^0.7.2",
-    "style-loader": "^0.23.1",
-    "url-loader": "^1.1.2",
-    "webpack": "^4.32.2",
-    "webpack-cli": "^3.3.2"
+    "vite": "^6.0.0",
+    "vite-plugin-static-copy": "^2.2.0"
   }
 }

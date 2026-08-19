@@ -4,8 +4,7 @@ import storageGet from "../tools/storageGet";
 import storageSet from "../tools/storageSet";
 import downloadBlob from "../tools/downloadBlob";
 import mobxCompare from "../tools/mobxCompare";
-
-const promiseLimit = require('promise-limit');
+import promiseLimit from 'promise-limit';
 
 const logger = getLogger('OptionsStore');
 const oneLimit = promiseLimit(1);

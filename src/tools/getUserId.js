@@ -1,7 +1,6 @@
 import storageGet from "./storageGet";
 import storageSet from "./storageSet";
-
-const uuid = require('uuid/v4');
+import {v4 as uuid} from 'uuid';
 
 let uuidCache = null;
 

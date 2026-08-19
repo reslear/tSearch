@@ -3,9 +3,8 @@ import NotFound from "./pages/NotFound";
 import {Redirect} from "react-router-dom";
 import ComponentLoader from "./components/ComponentLoader";
 import Search from "./pages/Search";
-
-const qs = require('querystring');
-const uuid = require('uuid/v4');
+import {v4 as uuid} from "uuid";
+import qs from './tools/query-string';
 
 const routes = [{
   path: '/',

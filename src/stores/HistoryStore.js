@@ -7,8 +7,7 @@ import storageGet from "../tools/storageGet";
 import storageSet from "../tools/storageSet";
 import mobxCompare from "../tools/mobxCompare";
 import checkChangeId from "../tools/checkChangeId";
-
-const promiseLimit = require('promise-limit');
+import promiseLimit from 'promise-limit';
 
 const logger = getLogger('HistoryStore');
 const oneLimit = promiseLimit(1);

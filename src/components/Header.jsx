@@ -3,8 +3,7 @@ import {Link, withRouter} from "react-router-dom";
 import React from "react";
 import PropTypes from "prop-types";
 import {inject, observer} from "mobx-react";
-
-const qs = require('querystring');
+import qs from "../tools/query-string";
 
 @withRouter
 @inject('rootStore')

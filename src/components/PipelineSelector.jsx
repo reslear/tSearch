@@ -7,8 +7,7 @@ import AddMethodDialog from "./AddMethodDialog";
 import EditMethodDialog from "./EditMethodDialog";
 import getLogger from "../tools/getLogger";
 import filesize from "filesize";
-
-const Sortable = require('sortablejs');
+import Sortable from 'sortablejs';
 
 const logger = getLogger('PipelineSelector');
 

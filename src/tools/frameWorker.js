@@ -1,7 +1,6 @@
 import getLogger from "./getLogger";
 import Transport from './transport';
-
-const qs = require('querystring');
+import qs from './query-string';
 
 const debug = getLogger('frameWorker');
 

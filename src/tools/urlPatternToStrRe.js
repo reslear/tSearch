@@ -1,7 +1,6 @@
 import _escapeRegExp from 'lodash.escaperegexp';
 import getPortSchemes from "./getPortSchemes";
-
-const required = require('requires-port');
+import required from 'requires-port';
 
 const getScheme = scheme => {
   if (!scheme || scheme === '*:') {

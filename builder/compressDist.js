@@ -5,7 +5,7 @@ const archiver = require('archiver');
 
 const compressDist = () => {
   const ext = 'zip';
-  const dist = path.join(BUILD_ENV.outputPath, 'dist');
+  const dist = BUILD_ENV.outputPath;
   const outputPath = BUILD_ENV.outputPath;
 
   const zipFolder = (srcFolder, zipFilePath, callback) => {

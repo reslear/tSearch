@@ -4,8 +4,8 @@ import PropTypes from "prop-types";
 import Dialog from "../Dialog";
 import {Link} from "react-router-dom";
 import highlight from "../../tools/highlight";
-
-const qs = require('querystring');
+import noPosterImage from '../../assets/img/no_poster.png';
+import qs from "../../tools/query-string";
 
 @inject('rootStore')
 @observer
@@ -138,7 +138,7 @@ class ExplorerItem extends React.Component {
 
     let posterUrl = itemStore.poster;
     if (!posterUrl || this.state.posterError) {
-      posterUrl = require('!url-loader!../../assets/img/no_poster.png');
+      posterUrl = noPosterImage;
     }
 
     const actions = [];

@@ -7,8 +7,7 @@ import getTitle from "../../tools/getTitle";
 import TackerStore from "./TackerStore";
 import ProfileEditorTrackerItem from "./ProfileEditorTrackerItem";
 import Dialog from "../Dialog";
-
-const Sortable = require('sortablejs');
+import Sortable from 'sortablejs';
 
 const logger = getLogger('ProfileEditorProfile');
 

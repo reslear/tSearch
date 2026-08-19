@@ -5,6 +5,7 @@ import storageGet from "../tools/storageGet";
 import storageSet from "../tools/storageSet";
 import reOrderStoreItems from "../tools/reOrderStoreItems";
 import mobxCompare from "../tools/mobxCompare";
+import trackersJson from '../trackers.json';
 
 const logger = getLogger('ProfilesStore');
 
@@ -154,7 +155,6 @@ const ProfilesStore = types.model('ProfilesStore', {
 });
 
 const getDefaultProfile = () => {
-  const trackersJson = require('../trackers.json');
   const trackerIds = Object.keys(trackersJson).map((id) => ({id}));
   return {
     id: 'default',

@@ -5,8 +5,7 @@ import loadLocalExplorerModule from "./loadLocalExplorerModule";
 import {ExplorerModuleStore} from "../stores/Explorer/ExplorerStore";
 import storageGet from "./storageGet";
 import storageSet from "./storageSet";
-
-const compareVersions = require('compare-versions');
+import compareVersions from 'compare-versions';
 
 const logger = getLogger('getExplorerModules');
 

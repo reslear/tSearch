@@ -6,8 +6,7 @@ import TrackerStore from "./TrackerStore";
 import RootStore from "./RootStore";
 import TrackerStoreStore from "./TrackerStoreStore";
 import getIconFromMeta from "../tools/getIconFromMeta";
-
-const escapeStringRegexp = require('escape-string-regexp');
+import escapeStringRegexp from 'escape-string-regexp';
 
 const logger = getLogger('ProfileEditorStore');
 

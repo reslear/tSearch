@@ -1,11 +1,8 @@
 import {ErrorWithCode, StatusCodeError} from './errors';
-import {fetch} from 'whatwg-fetch';
-import 'abortcontroller-polyfill/dist/abortcontroller-polyfill-only';
 import getLogger from "./getLogger";
 import base64ToArrayBuffer from "./base64ToArrayBuffer";
-
-const deserializeError = require('deserialize-error');
-const contentType = require('content-type');
+import deserializeError from 'deserialize-error';
+import * as contentType from 'content-type';
 
 const logger = getLogger('exKitRequest');
 

@@ -1,12 +1,9 @@
 import {getParentOfType, isAlive, types} from 'mobx-state-tree';
 import {AbortError, StatusCodeError} from "../tools/errors";
-import 'abortcontroller-polyfill/dist/abortcontroller-polyfill-only'
-import {fetch} from 'whatwg-fetch'
 import getLogger from "../tools/getLogger";
 import RootStore from "./RootStore";
-
-const qs = require('querystring');
-const escapeStringRegexp = require('escape-string-regexp');
+import qs from "../tools/query-string";
+import escapeStringRegexp from 'escape-string-regexp';
 
 const debug = getLogger('searchFormStore');
 

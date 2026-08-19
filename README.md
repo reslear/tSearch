@@ -16,8 +16,8 @@ Build
 - Requires Node.js and npm.
 - Commands:
   - `npm run build` — dev build (with sourcemaps, no minification).
-  - `npm run buildRelease` — release build (also with sourcemaps, kept unminified for debugging).
-- Output: `dist/dist/`.
+  - `npm run release` — build trackers/json, options, Vite production build, and zip archive.
+- Output: `dist/`.
 - Install in Chrome: “Load unpacked” and select `dist/dist`.
 
 Compatibility
@@ -44,8 +44,8 @@ ___
 - Требуется Node.js и npm.
 - Команды:
   - `npm run build` — сборка для разработки (с sourcemap, без минификации).
-  - `npm run buildRelease` — релизная сборка (также с sourcemap, без минификации для отладки).
-- Готовые файлы: `dist/dist/`.
+  - `npm run release` — сборка данных, production Vite-сборка и zip-архивация.
+- Готовые файлы: `dist/`.
 - Установка в Chrome: «Load unpacked» и выбрать `dist/dist`.
 
 Совместимость

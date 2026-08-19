@@ -7,8 +7,7 @@ import isTrailer from "../../tools/isTrailer";
 import highlight from "../../tools/highlight";
 import mobxCompare from "../../tools/mobxCompare";
 import checkChangeId from "../../tools/checkChangeId";
-
-const promiseLimit = require('promise-limit');
+import promiseLimit from 'promise-limit';
 
 const logger = getLogger('ExplorerQuickSearchStore');
 const oneLimit = promiseLimit(1);

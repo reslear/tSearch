@@ -7,13 +7,12 @@ import Dialog from "../components/Dialog";
 import getLogger from "../tools/getLogger";
 import getTitle from "../tools/getTitle";
 import jsonCodeToUserscript from "../tools/jsonCodeToUserscript";
-
-const CodeMirror = require('codemirror');
-require('codemirror/mode/javascript/javascript');
-require('codemirror/addon/edit/matchbrackets');
-require('codemirror/addon/edit/closebrackets');
-require('codemirror/addon/comment/continuecomment');
-require('codemirror/addon/selection/active-line');
+import CodeMirror from 'codemirror';
+import 'codemirror/mode/javascript/javascript';
+import 'codemirror/addon/edit/matchbrackets';
+import 'codemirror/addon/edit/closebrackets';
+import 'codemirror/addon/comment/continuecomment';
+import 'codemirror/addon/selection/active-line';
 
 const logger = getLogger('Editor');
 

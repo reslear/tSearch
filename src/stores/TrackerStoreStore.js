@@ -1,6 +1,5 @@
 import {destroy, flow, getRoot, isAlive, types} from 'mobx-state-tree';
 import getLogger from "../tools/getLogger";
-import {fetch} from "whatwg-fetch";
 import {struct} from 'superstruct';
 import TrackerStore, {TrackerMetaStore} from "./TrackerStore";
 import getTrackerCodeMeta from "../tools/getTrackerCodeMeta";

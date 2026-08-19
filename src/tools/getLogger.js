@@ -1,3 +1,5 @@
+import {BUILD_ENV} from './buildEnv';
+
 /**
  * @typedef {function} Logger
  * @property {function} log
@@ -38,7 +40,7 @@ function selectColor(namespace) {
  */
 const getLogger = name => {
   let fn = null;
-  if (typeof BUILD_ENV !== 'undefined' && BUILD_ENV.FLAG_ENABLE_LOGGER) {
+  if (BUILD_ENV.FLAG_ENABLE_LOGGER) {
     const colorArgs = [];
     if (BUILD_ENV.mode === 'development') {
       colorArgs.push(`%c${name}`, `color: ${selectColor(name)}`);

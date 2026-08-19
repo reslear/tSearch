@@ -9,8 +9,7 @@ import storageGet from "../../tools/storageGet";
 import ExplorerQuickSearchStore from "./ExplorerQuickSearchStore";
 import reOrderStoreItems from "../../tools/reOrderStoreItems";
 import mobxCompare from "../../tools/mobxCompare";
-
-const promiseLimit = require('promise-limit');
+import promiseLimit from 'promise-limit';
 
 const logger = getLogger('ExplorerStore');
 const limitOne = promiseLimit(1);
