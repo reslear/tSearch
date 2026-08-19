@@ -182,6 +182,18 @@
   "importZip": {
     "message": "Імпарт з ZIP-файла"
   },
+  "clearOptions": {
+    "message": "Скінуць налады"
+  },
+  "clearHistory": {
+    "message": "Ачысціць гісторыю"
+  },
+  "confirmClearOptions": {
+    "message": "Вы ўпэўнены, што хочаце скінуць усе налады?"
+  },
+  "confirmClearHistory": {
+    "message": "Вы ўпэўнены, што хочаце ачысціць гісторыю?"
+  },
   "invertIcon": {
     "message": "Інвертаваць колер значка пашырэння"
   },

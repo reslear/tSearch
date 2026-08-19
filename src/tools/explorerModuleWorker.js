@@ -1,5 +1,5 @@
-import ModuleWorker from "./moduleWorker";
-import {ErrorWithCode} from "./errors";
+import ModuleWorker from "./moduleWorker.js";
+import {ErrorWithCode} from "./errors.js";
 
 class ExplorerModuleWorker extends ModuleWorker {
   constructor(...args) {

@@ -1,9 +1,9 @@
-import exKitGetDoc from "./exKitGetDoc";
-import {ErrorWithCode} from "./errors";
-import closestElement from "./closestElement";
-import getLogger from "./getLogger";
+import exKitGetDoc from "./exKitGetDoc.js";
+import {ErrorWithCode} from "./errors.js";
+import closestElement from "./closestElement.js";
+import getLogger from "./getLogger.js";
 import escapeStringRegexp from "escape-string-regexp";
-import qs from './query-string';
+import qs from './query-string.js';
 
 const logger = getLogger('requestQueryDescription');
 

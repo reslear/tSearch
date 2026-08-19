@@ -1,5 +1,5 @@
 import _escapeRegExp from 'lodash.escaperegexp';
-import getPortSchemes from "./getPortSchemes";
+import getPortSchemes from "./getPortSchemes.js";
 import required from 'requires-port';
 
 const getScheme = scheme => {

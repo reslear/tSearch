@@ -104,6 +104,18 @@
   "importZip": {
     "message": "Импорт из ZIP-файла"
   },
+  "clearOptions": {
+    "message": "Сбросить настройки"
+  },
+  "clearHistory": {
+    "message": "Очистить историю"
+  },
+  "confirmClearOptions": {
+    "message": "Вы уверены, что хотите сбросить все настройки?"
+  },
+  "confirmClearHistory": {
+    "message": "Вы уверены, что хотите очистить историю?"
+  },
   "row_date": {
     "message": "Добавлено"
   },

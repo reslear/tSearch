@@ -1,4 +1,4 @@
-import assertType, {isElement, isNode, isNumber, isString} from "./assertType";
+import assertType, {isElement, isNode, isNumber, isString} from "./assertType.js";
 
 const exKitPipelineMethods = {
   getAttr: {

@@ -1,6 +1,5 @@
 import {flow, getParentOfType, isAlive, resolveIdentifier, types} from 'mobx-state-tree';
 import getLogger from "../tools/getLogger";
-import {getErrorLogger} from "../tools/errorLogger";
 import RootStore from "./RootStore";
 import TrackerStore from "./TrackerStore";
 import highlight from "../tools/highlight";
@@ -111,8 +110,7 @@ const TrackerSearchStore = types.model('TrackerSearchStore', {
           }
         } else {
           logger.error(`[${id}] searchWrapper error`, err);
-          // Log to error logger for debugging
-          getErrorLogger().error('SearchStore', err, {
+          logger.error('searchWrapper error context', {
             trackerId: id,
             query: getParentOfType(self, SearchStore).query,
             errorMessage,

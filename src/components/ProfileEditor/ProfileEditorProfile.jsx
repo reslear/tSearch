@@ -24,6 +24,11 @@ class ProfileEditorProfile extends React.Component {
     document.title = getTitle(`Edit profile "${this.profileEditorProfileStore.name}"`);
   }
 
+  getMessage = (key, fallback) => {
+    const value = chrome.i18n.getMessage(key);
+    return value || fallback;
+  };
+
   state = {
     showOptions: false,
     showStore: false,
@@ -281,14 +286,14 @@ class ProfileEditorProfile extends React.Component {
       selectionHelpers = (
         <div key={'selectionHelpers'} className="filter__helpers">
           <span className="selection_helpers__counter">
-            {chrome.i18n.getMessage('trackers_selected')}: {selectedVisibleTrackersCount}/{currentTrackersCount}
+            {`${this.getMessage('trackers_selected', 'Selected')}: ${selectedVisibleTrackersCount}/${currentTrackersCount}`}
           </span>
           <button onClick={this.handleSelectAllTrackers}
                   disabled={currentTrackersCount === 0}
-                  className="styled-button">{chrome.i18n.getMessage('trackers_select_all')}</button>
+                  className="styled-button">{this.getMessage('trackers_select_all', 'Select all')}</button>
           <button onClick={this.handleUnselectAllTrackers}
                   disabled={selectedVisibleTrackersCount === 0}
-                  className="styled-button">{chrome.i18n.getMessage('trackers_unselect_all')}</button>
+                  className="styled-button">{this.getMessage('trackers_unselect_all', 'Unselect all')}</button>
         </div>
       );
     }

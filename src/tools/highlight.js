@@ -1,7 +1,7 @@
 import React from 'react';
 import escapeRegExp from 'lodash.escaperegexp';
-import sortByLength from "./sortByLength";
-import isBoundary from "./isBoundary";
+import sortByLength from "./sortByLength.js";
+import isBoundary from "./isBoundary.js";
 
 const adapter = {
   createDocumentFragment() {

@@ -155,6 +155,10 @@ const OptionsStore = types.model('OptionsStore', {
   options: types.maybeNull(OptionsValueStore),
 }).actions(self => {
   return {
+    clear() {
+      self.options = {};
+      return self.save();
+    },
     setOptions(value) {
       self.options = value;
     },

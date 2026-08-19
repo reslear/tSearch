@@ -1,7 +1,7 @@
-import storageGet from "./storageGet";
-import getLogger from "./getLogger";
-import getTrackerCodeMeta from "./getTrackerCodeMeta";
-import storageSet from "./storageSet";
+import storageGet from "./storageGet.js";
+import getLogger from "./getLogger.js";
+import getTrackerCodeMeta from "./getTrackerCodeMeta.js";
+import storageSet from "./storageSet.js";
 
 const logger = getLogger('migrate');
 

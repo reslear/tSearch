@@ -1,4 +1,4 @@
-import getLogger from "./getLogger";
+import getLogger from "./getLogger.js";
 import compareVersion from 'compare-versions';
 
 const debug = getLogger('getCodeMeta');

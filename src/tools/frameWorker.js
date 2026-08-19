@@ -1,6 +1,6 @@
-import getLogger from "./getLogger";
-import Transport from './transport';
-import qs from './query-string';
+import getLogger from "./getLogger.js";
+import Transport from './transport.js';
+import qs from './query-string.js';
 
 const debug = getLogger('frameWorker');
 

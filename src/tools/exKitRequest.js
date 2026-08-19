@@ -1,6 +1,6 @@
-import {ErrorWithCode, StatusCodeError} from './errors';
-import getLogger from "./getLogger";
-import base64ToArrayBuffer from "./base64ToArrayBuffer";
+import {ErrorWithCode, StatusCodeError} from './errors.js';
+import getLogger from "./getLogger.js";
+import base64ToArrayBuffer from "./base64ToArrayBuffer.js";
 import deserializeError from 'deserialize-error';
 import * as contentType from 'content-type';
 

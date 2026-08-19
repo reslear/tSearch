@@ -1,4 +1,4 @@
-import urlPatternToStrRe from './urlPatternToStrRe';
+import urlPatternToStrRe from './urlPatternToStrRe.js';
 
 
 const exKitBuildConnectRe = connect => {

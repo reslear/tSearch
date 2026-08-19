@@ -1,7 +1,7 @@
-import FrameWorker from "./frameWorker";
-import exKitRequest from "./exKitRequest";
-import exKitBuildConnectRe from "./exKitBuildConnectRe";
-import getLogger from "./getLogger";
+import FrameWorker from "./frameWorker.js";
+import exKitRequest from "./exKitRequest.js";
+import exKitBuildConnectRe from "./exKitBuildConnectRe.js";
+import getLogger from "./getLogger.js";
 
 const logger = getLogger('moduleWorker');
 

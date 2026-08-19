@@ -104,6 +104,18 @@
     "importZip": {
         "message": "Import from ZIP-file"
     },
+    "clearOptions": {
+        "message": "Reset settings"
+    },
+    "clearHistory": {
+        "message": "Clear history"
+    },
+    "confirmClearOptions": {
+        "message": "Are you sure you want to reset all settings?"
+    },
+    "confirmClearHistory": {
+        "message": "Are you sure you want to clear search history?"
+    },
     "row_date": {
         "message": "Date"
     },

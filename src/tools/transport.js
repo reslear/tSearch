@@ -1,4 +1,4 @@
-import getLogger from "./getLogger";
+import getLogger from "./getLogger.js";
 import once from 'lodash.once';
 import deserializeError from 'deserialize-error';
 import serializeError from 'serialize-error';

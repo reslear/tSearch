@@ -1,4 +1,4 @@
-import qs from './query-string';
+import qs from './query-string.js';
 
 /**
  * Trackers may leave headers unset (null), pass a plain object, or use the

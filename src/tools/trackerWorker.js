@@ -1,4 +1,4 @@
-import ModuleWorker from "./moduleWorker";
+import ModuleWorker from "./moduleWorker.js";
 
 class TrackerWorker extends ModuleWorker {
   constructor(...args) {

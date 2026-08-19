@@ -1,4 +1,4 @@
-import {BUILD_ENV} from './buildEnv';
+import {BUILD_ENV} from './buildEnv.js';
 
 /**
  * @typedef {function} Logger

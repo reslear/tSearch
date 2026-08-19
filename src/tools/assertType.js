@@ -1,4 +1,4 @@
-import {ErrorWithCode} from "./errors";
+import {ErrorWithCode} from "./errors.js";
 
 const assertType = (inType, outType, fn) => {
   if (inType && outType) {

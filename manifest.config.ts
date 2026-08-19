@@ -21,7 +21,7 @@ export default defineManifest({
     open_in_tab: true,
   },
   optional_permissions: ['tabs'],
-  permissions: ['storage', 'contextMenus', 'unlimitedStorage', 'scripting', 'declarativeNetRequestWithHostAccess'],
+  permissions: ['storage', 'contextMenus', 'unlimitedStorage', 'scripting', 'declarativeNetRequestWithHostAccess', 'proxy'],
   host_permissions: ['http://*/*', 'https://*/*'],
   omnibox: {
     keyword: 'tms',

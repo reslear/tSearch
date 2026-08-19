@@ -1,5 +1,5 @@
-import storageGet from "./storageGet";
-import storageSet from "./storageSet";
+import storageGet from "./storageGet.js";
+import storageSet from "./storageSet.js";
 
 let uuidCache = null;
 

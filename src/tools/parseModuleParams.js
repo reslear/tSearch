@@ -1,4 +1,4 @@
-import qs from './query-string';
+import qs from './query-string.js';
 
 const parseModuleParams = (params) => {
   if (/^{.+}$/.test(params)) {

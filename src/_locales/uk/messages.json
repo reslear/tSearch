@@ -173,12 +173,24 @@
    "imdbSeries": {
       "message": "IMDB: Серіали"
    },
-   "importZip": {
-      "message": "Імпорт з ZIP-файлу"
-   },
-   "invertIcon": {
-      "message": "Інвертувати колір іконки розширення"
-   },
+  "importZip": {
+     "message": "Імпорт з ZIP-файлу"
+  },
+  "clearOptions": {
+     "message": "Скинути налаштування"
+  },
+  "clearHistory": {
+     "message": "Очистити історію"
+  },
+  "confirmClearOptions": {
+     "message": "Ви впевнені, що хочете скинути всі налаштування?"
+  },
+  "confirmClearHistory": {
+     "message": "Ви впевнені, що хочете очистити історію?"
+  },
+  "invertIcon": {
+     "message": "Інвертувати колір іконки розширення"
+  },
    "kitAddTime": {
       "message": "Час додавання"
    },

@@ -1,4 +1,4 @@
-import colorToIcon from "./colorToIcon";
+import colorToIcon from "./colorToIcon.js";
 
 const getIconFromMeta = (meta) => {
   let result = '';

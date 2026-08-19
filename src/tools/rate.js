@@ -1,7 +1,7 @@
 import escapeRegExp from 'lodash.escaperegexp';
-import isEmptyObject from "./isEmptyObject";
-import isPunctuation from "./isPunctuation";
-import isBoundary from "./isBoundary";
+import isEmptyObject from "./isEmptyObject.js";
+import isPunctuation from "./isPunctuation.js";
+import isBoundary from "./isBoundary.js";
 
 const categoryDefineRegexp = new RegExp("фильмы без сюжета|документальные|мультим|мульт|сериа|комикс|видео для [моб|смарт|" +
   "устр]{1}|мобильное|аудиокниги|беллетр|книг|фильм|игр|3gp|soundtrack|саундтрек|anim|аним|докумел|литер|" +

@@ -1,10 +1,10 @@
-import getTrackersJson from "./getTrackersJson";
-import loadLocalTrackerModule from "./loadLocalTrackerModule";
-import getLogger from "./getLogger";
+import getTrackersJson from "./getTrackersJson.js";
+import loadLocalTrackerModule from "./loadLocalTrackerModule.js";
+import getLogger from "./getLogger.js";
 import TrackerStore from "../stores/TrackerStore";
 import {destroy} from "mobx-state-tree";
-import storageGet from "./storageGet";
-import storageSet from "./storageSet";
+import storageGet from "./storageGet.js";
+import storageSet from "./storageSet.js";
 import compareVersions from 'compare-versions';
 
 const logger = getLogger('getTrackers');

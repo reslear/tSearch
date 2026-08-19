@@ -123,6 +123,10 @@ const HistoryStore = types.model('HistoryStore', {
   history: types.maybe(types.map(HistoryQueryStore)),
 }).actions(self => {
   return {
+    clear() {
+      self.history.clear();
+      return self.save();
+    },
     setHistory(value) {
       self.history = value;
     },

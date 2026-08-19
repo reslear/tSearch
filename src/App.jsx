@@ -6,12 +6,9 @@ import {Provider} from 'mobx-react';
 import routes from "./routes";
 import '../src/assets/css/index.less';
 import './assets/css/build-meta.less';
-import errorTracker from "./tools/errorTracker";
 import WhenReady from "./components/WhenReady";
 import BuildMeta from './components/BuildMeta';
 import './shims/setImmediate';
-
-errorTracker.bindExceptions();
 
 const rootStore = window.rootStore = RootStore.create();
 

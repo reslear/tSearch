@@ -1,4 +1,4 @@
-import getTrackerCodeMeta from "./getTrackerCodeMeta";
+import getTrackerCodeMeta from "./getTrackerCodeMeta.js";
 
 const loadLocalTrackerModule = id => {
   return fetch(chrome.runtime.getURL('src/trackers/' + id + '.js')).then(response => {

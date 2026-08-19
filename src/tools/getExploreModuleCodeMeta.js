@@ -1,4 +1,4 @@
-import getCodeMeta from "./getCodeMeta";
+import getCodeMeta from "./getCodeMeta.js";
 
 const fieldType = {
   name: '*string',

@@ -1,6 +1,6 @@
-import getNow from "./getNow";
-import storageGet from "./storageGet";
-import storageSet from "./storageSet";
+import getNow from "./getNow.js";
+import storageGet from "./storageGet.js";
+import storageSet from "./storageSet.js";
 import promiseLimit from 'promise-limit';
 
 const limitOne = promiseLimit(1);

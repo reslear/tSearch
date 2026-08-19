@@ -7,7 +7,6 @@ import {Link} from "react-router-dom";
 import {inject, observer} from "mobx-react";
 import getTitle from "../tools/getTitle";
 import promiseFinally from "../tools/promiseFinally";
-import LogsPage from "./LogsPage";
 
 
 @inject('rootStore')
@@ -54,6 +53,24 @@ class Options extends React.Component {
     this.optionsStore.importZip().then(...promiseFinally(() => {
       this.state.importLock = false;
     }));
+  };
+
+  handleClearOptions = (e) => {
+    e.preventDefault();
+    const confirmed = window.confirm(chrome.i18n.getMessage('confirmClearOptions'));
+    if (!confirmed) {
+      return;
+    }
+    this.optionsStore.clear();
+  };
+
+  handleClearHistory = (e) => {
+    e.preventDefault();
+    const confirmed = window.confirm(chrome.i18n.getMessage('confirmClearHistory'));
+    if (!confirmed) {
+      return;
+    }
+    this.props.rootStore.history.clear();
   };
 
   render() {
@@ -109,13 +126,13 @@ class Options extends React.Component {
                  className="button backup__export-zip">{chrome.i18n.getMessage('exportZip')}</a>
               <a onClick={this.handleImport} type="button" href="#"
                  className="button backup__import-zip">{chrome.i18n.getMessage('importZip')}</a>
+              <a onClick={this.handleClearOptions} type="button" href="#"
+                 className="button backup__clear-options">{chrome.i18n.getMessage('clearOptions')}</a>
+              <a onClick={this.handleClearHistory} type="button" href="#"
+                 className="button backup__clear-history">{chrome.i18n.getMessage('clearHistory')}</a>
             </div>
           </div>
         );
-        break;
-      }
-      case 'logs': {
-        page = <LogsPage/>;
         break;
       }
     }
@@ -128,7 +145,6 @@ class Options extends React.Component {
             <Link to="/options/main" className="sections__item" data-page="basic">{chrome.i18n.getMessage('basic')}</Link>
             <Link to="/options/explorer" className="sections__item" data-page="mainPage">{chrome.i18n.getMessage('mainPage')}</Link>
             <Link to="/options/backup" className="sections__item" data-page="backup">{chrome.i18n.getMessage('backupRestore')}</Link>
-            <Link to="/options/logs" className="sections__item" data-page="logs">Logs</Link>
           </div>
           <div className="options">
             {page}

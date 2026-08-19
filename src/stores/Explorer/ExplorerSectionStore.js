@@ -1,7 +1,6 @@
 import {applyPatch, flow, getParentOfType, isAlive, resolveIdentifier, types} from "mobx-state-tree";
 import ExplorerModuleStore from "./ExplorerModuleStore";
 import getLogger from "../../tools/getLogger";
-import {getErrorLogger} from "../../tools/errorLogger";
 import ExplorerItemStore from "./ExplorerItemStore";
 import RootStore from "../RootStore";
 import ExplorerCommandStore from "./ExplorerCommandStore";
@@ -127,8 +126,7 @@ const ExplorerSectionStore = types.model('ExplorerSectionStore', {
           // Only log actual extension errors, not network issues
           if (!isNetworkError(err)) {
             logger.error('fetch error', id, err);
-            // Log to error logger for debugging
-            getErrorLogger().error('ExplorerSectionStore', err, {
+            logger.error('fetch error context', {
               sectionId: id,
               moduleId: self.moduleId,
             });

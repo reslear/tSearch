@@ -182,6 +182,18 @@
   "importZip": {
     "message": "Import z ZIP"
   },
+  "clearOptions": {
+    "message": "Przywróć ustawienia domyślne"
+  },
+  "clearHistory": {
+    "message": "Wyczyść historię"
+  },
+  "confirmClearOptions": {
+    "message": "Na pewno chcesz przywrócić domyślne ustawienia?"
+  },
+  "confirmClearHistory": {
+    "message": "Na pewno chcesz wyczyścić historię?"
+  },
   "invertIcon": {
     "message": "Odwróć kolor ikony rozszerzenia"
   },

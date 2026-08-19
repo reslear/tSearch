@@ -1,10 +1,10 @@
-import getLogger from "./getLogger";
+import getLogger from "./getLogger.js";
 import {destroy} from "mobx-state-tree";
-import getExplorerModulesJson from "./getExplorerModulesJson";
-import loadLocalExplorerModule from "./loadLocalExplorerModule";
+import getExplorerModulesJson from "./getExplorerModulesJson.js";
+import loadLocalExplorerModule from "./loadLocalExplorerModule.js";
 import {ExplorerModuleStore} from "../stores/Explorer/ExplorerStore";
-import storageGet from "./storageGet";
-import storageSet from "./storageSet";
+import storageGet from "./storageGet.js";
+import storageSet from "./storageSet.js";
 import compareVersions from 'compare-versions';
 
 const logger = getLogger('getExplorerModules');

@@ -1,6 +1,6 @@
-import convertCodeV1toV2 from "./convertCodeV1toV2";
-import convertCodeV2toV3 from "./convertCodeV2toV3";
-import jsonToUserscript from "./jsonToUserscript";
+import convertCodeV1toV2 from "./convertCodeV1toV2.js";
+import convertCodeV2toV3 from "./convertCodeV2toV3.js";
+import jsonToUserscript from "./jsonToUserscript.js";
 
 const jsonCodeToUserscript = (text) => {
   let json = JSON.parse(text);
