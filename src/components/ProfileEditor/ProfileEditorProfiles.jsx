@@ -4,8 +4,14 @@ import PropTypes from "prop-types";
 import {Link, withRouter} from "react-router-dom";
 import getLogger from "../../tools/getLogger";
 import getTitle from "../../tools/getTitle";
-import {v4 as uuid} from "uuid";
 import Sortable from 'sortablejs';
+
+const createProfileId = () => {
+  if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
+    return crypto.randomUUID();
+  }
+  return `${Date.now()}-${Math.random().toString(16).slice(2)}`;
+};
 
 const logger = getLogger('ProfileEditorProfiles');
 
@@ -70,7 +76,7 @@ class ProfileEditorProfiles extends React.Component {
 
   handleCreate = (e) => {
     e.preventDefault();
-    const id = uuid();
+    const id = createProfileId();
     this.profileEditorStore.createProfile(id);
     this.props.history.push(`/profileEditor/${id}`);
   };

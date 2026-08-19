@@ -3,8 +3,14 @@ import NotFound from "./pages/NotFound";
 import {Redirect} from "react-router-dom";
 import ComponentLoader from "./components/ComponentLoader";
 import Search from "./pages/Search";
-import {v4 as uuid} from "uuid";
 import qs from './tools/query-string';
+
+const createEditorId = () => {
+  if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
+    return crypto.randomUUID();
+  }
+  return `${Date.now()}-${Math.random().toString(16).slice(2)}`;
+};
 
 const routes = [{
   path: '/',
@@ -62,7 +68,7 @@ const routes = [{
     const id = props.match.params.id;
     if (!id) {
       return (
-        <Redirect to={`/editor/${type}/${uuid()}`}/>
+        <Redirect to={`/editor/${type}/${createEditorId()}`}/>
       );
     }
     return (
