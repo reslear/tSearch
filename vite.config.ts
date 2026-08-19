@@ -101,10 +101,11 @@ export default defineConfig(({ mode }) => {
         },
       }),
       crx({ manifest: getManifest(mode) }),
-      zip({
+      // Repacking the release zip on every rebuild is pure noise while watching.
+      ...(mode === 'watch' ? [] : [zip({
         outDir: 'release',
         outFileName: 'tms.zip',
-      }),
+      })]),
     ],
     build: {
       outDir: 'dist',

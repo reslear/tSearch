@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "scripts": {
     "build:data": "node ./builder/buildExplorersJson.mjs && node ./builder/buildTrackersJson.mjs",
-    "dev": "vite",
+    "dev": "vite build --mode watch --watch",
+    "dev:server": "vite",
     "build": "tsc --noEmit && vite build",
     "typecheck": "tsc --noEmit",
     "release": "pnpm run build:data && pnpm run build"
