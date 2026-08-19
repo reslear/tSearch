@@ -1,0 +1,521 @@
+{
+  "add": {
+    "message": "Dodaj"
+  },
+  "addInFavorite": {
+    "message": "Dodaj do ulubionych"
+  },
+  "addTrackerCode": {
+    "message": "Dodaj kod"
+  },
+  "advanced_options": {
+    "message": "Tryb zaawansowany"
+  },
+  "autoUpdate": {
+    "message": "Automatycznie aktualizuj"
+  },
+  "backupRestore": {
+    "message": "Kopia zapasowa / Przywróć"
+  },
+  "basic": {
+    "message": "Główne"
+  },
+  "cancel": {
+    "message": "Anuluj"
+  },
+  "categoryAll": {
+    "message": "Wszystkie"
+  },
+  "categoryAnime": {
+    "message": "Anime"
+  },
+  "categoryBooks": {
+    "message": "Książki"
+  },
+  "categoryCartoons": {
+    "message": "Manga"
+  },
+  "categoryDocumentary": {
+    "message": "Dokumentalne"
+  },
+  "categoryFilms": {
+    "message": "Filmy"
+  },
+  "categoryGames": {
+    "message": "Gry"
+  },
+  "categoryHumor": {
+    "message": "Humor"
+  },
+  "categoryMusic": {
+    "message": "Muzyka"
+  },
+  "categoryOther": {
+    "message": "Inne"
+  },
+  "categorySerials": {
+    "message": "Seriale"
+  },
+  "categorySoft": {
+    "message": "Aplikacje"
+  },
+  "categorySport": {
+    "message": "Sport"
+  },
+  "categoryWordFilter": {
+    "message": "Uwzględniaj kategorię przy filtrowaniu słów"
+  },
+  "categoryXXX": {
+    "message": "XXX"
+  },
+  "change": {
+    "message": "Zmień"
+  },
+  "clear": {
+    "message": "Wyczyść"
+  },
+  "close": {
+    "message": "Zamknij"
+  },
+  "contextMenu": {
+    "message": "Dodaj wyszukiwanie do menu kontekstowego"
+  },
+  "contextMenuTitle": {
+    "message": "Wyszukaj torrent"
+  },
+  "createCode": {
+    "message": "Utwórz kod"
+  },
+  "default": {
+    "message": "Domyślnie"
+  },
+  "defaultProfileName": {
+    "message": "Domyślny"
+  },
+  "defineCategory": {
+    "message": "Automatycznie określaj kategorię"
+  },
+  "descUrl": {
+    "message": "URL opisu"
+  },
+  "disablePopup": {
+    "message": "Nie pokazuj okna wyszukiwania po kliknięciu ikony rozszerzenia"
+  },
+  "edit": {
+    "message": "Edytuj"
+  },
+  "enableProxy": {
+    "message": "Włącz obsługę proxy"
+  },
+  "enterTrackerCode": {
+    "message": "Wklej kod trackera:"
+  },
+  "exportZip": {
+    "message": "Eksport do ZIP"
+  },
+  "extDesc": {
+    "message": "Torrents MultiSearch - wyszukaj jednocześnie na wielu trackerach!"
+  },
+  "extName": {
+    "message": "TMS - Wyszukiwanie torrentów"
+  },
+  "favoriteSync": {
+    "message": "Synchronizuj ulubione"
+  },
+  "favorites": {
+    "message": "Ulubione"
+  },
+  "filter_all": {
+    "message": "Wszystkie"
+  },
+  "filter_selected": {
+    "message": "Wybrane"
+  },
+  "filter_withoutList": {
+    "message": "Bez listy"
+  },
+  "fetchMeta": {
+    "message": "Pobierz metadane"
+  },
+  "ggGamesNew": {
+    "message": "Gry: Nowe"
+  },
+  "ggGamesTop": {
+    "message": "Gry: Najlepsze"
+  },
+  "goToTheWebsite": {
+    "message": "Przejdź do strony"
+  },
+  "hidePeerRow": {
+    "message": "Ukryj kolumnę \"Pobierający\""
+  },
+  "hideSeedRow": {
+    "message": "Ukryj kolumnę \"Udostępniający\""
+  },
+  "history": {
+    "message": "Historia"
+  },
+  "historyEmpty": {
+    "message": "Jeszcze pusto..."
+  },
+  "imageUrl": {
+    "message": "URL obrazu"
+  },
+  "imdbInCinema": {
+    "message": "IMDB: Teraz w kinie"
+  },
+  "imdbPopular": {
+    "message": "IMDB: Filmy"
+  },
+  "imdbSeries": {
+    "message": "IMDB: Seriale"
+  },
+  "importZip": {
+    "message": "Import z ZIP"
+  },
+  "invertIcon": {
+    "message": "Odwróć kolor ikony rozszerzenia"
+  },
+  "kitAddTime": {
+    "message": "Czas dodania"
+  },
+  "kitAttribute": {
+    "message": "Atrybut"
+  },
+  "kitBaseUrl": {
+    "message": "Podstawowy URL"
+  },
+  "kitCategoryLink": {
+    "message": "Link kategorii"
+  },
+  "kitCategoryName": {
+    "message": "Kategoria"
+  },
+  "kitConvert": {
+    "message": "Konwersja"
+  },
+  "kitConvertToNumber": {
+    "message": "Konwertuj na liczbę"
+  },
+  "kitConvertedString": {
+    "message": "Przekształcony ciąg"
+  },
+  "kitDesc": {
+    "message": "Opis"
+  },
+  "kitGetCode": {
+    "message": "Pobierz kod"
+  },
+  "kitIcon": {
+    "message": "Ikona trackera (16x16)"
+  },
+  "kitLogin": {
+    "message": "Logowanie"
+  },
+  "kitLoginFormSelector": {
+    "message": "Selektor formularza logowania"
+  },
+  "kitLoginUrl": {
+    "message": "URL strony logowania"
+  },
+  "kitNextPageLink": {
+    "message": "Link do następnej strony"
+  },
+  "kitOpen": {
+    "message": "Otwórz"
+  },
+  "kitOpenQuery": {
+    "message": "Zapytanie wyszukiwania"
+  },
+  "kitPageCharset": {
+    "message": "Kodowanie strony"
+  },
+  "kitPeerCount": {
+    "message": "Liczba peerów"
+  },
+  "kitPostBody": {
+    "message": "POST body"
+  },
+  "kitQuery": {
+    "message": "Zapytanie wyszukiwania (użyj %search% jako wzorca)"
+  },
+  "kitReadCode": {
+    "message": "Odczytaj kod"
+  },
+  "kitRegexpPattern": {
+    "message": "Wzór Regexp"
+  },
+  "kitReplaceMonth": {
+    "message": "Zamieniaj nazwę miesiąca na numer"
+  },
+  "kitReplaceString": {
+    "message": "zastępowane napisem"
+  },
+  "kitReplaceToday": {
+    "message": "Zamieniaj słowa teraz\\dzisiaj\\wczoraj na datę"
+  },
+  "kitResult": {
+    "message": "Wynik"
+  },
+  "kitRowSelector": {
+    "message": "Selektor wiersza"
+  },
+  "kitSaveLoad": {
+    "message": "Zapisz / Wczytaj"
+  },
+  "kitSearch": {
+    "message": "Wyszukaj"
+  },
+  "kitSearchMethod": {
+    "message": "Metoda"
+  },
+  "kitSearchQueryEncoding": {
+    "message": "Kodowanie zapytania"
+  },
+  "kitSearchUrl": {
+    "message": "URL strony wyszukiwania"
+  },
+  "kitSeedCount": {
+    "message": "Liczba seedów"
+  },
+  "kitSelect": {
+    "message": "Wybierz"
+  },
+  "kitSelectors": {
+    "message": "Selektory"
+  },
+  "kitSkip": {
+    "message": "Pomiń wiersze"
+  },
+  "kitSkipEnd": {
+    "message": "Od końca"
+  },
+  "kitSkipFirstRows": {
+    "message": "Pomiń pierwsze N wierszy"
+  },
+  "kitSkipLastRows": {
+    "message": "Pomiń ostatnie N wierszy"
+  },
+  "kitSkipTop": {
+    "message": "Od góry"
+  },
+  "kitSourceString": {
+    "message": "Tekst źródłowy"
+  },
+  "kitTableRow": {
+    "message": "Wiersz tabeli"
+  },
+  "kitTorrentDownloadLink": {
+    "message": "Link pobierania"
+  },
+  "kitTorrentLink": {
+    "message": "Link torrenta"
+  },
+  "kitTorrentSize": {
+    "message": "Rozmiar torrenta"
+  },
+  "kitTorrentTitle": {
+    "message": "Tytuł torrenta"
+  },
+  "kitTrackerCodeReadError": {
+    "message": "Błąd odczytu kodu trackera"
+  },
+  "kitTrackerDesc": {
+    "message": "Opis trackera"
+  },
+  "kitTrackerIsDownloadUrl": {
+    "message": "URL pobierania"
+  },
+  "kitTrackerTitle": {
+    "message": "Nazwa trackera"
+  },
+  "kitTrackerUpdateUrl": {
+    "message": "URL sprawdzania aktualizacji"
+  },
+  "kitTrackerUrl": {
+    "message": "URL"
+  },
+  "kitTrackerVersion": {
+    "message": "Wersja"
+  },
+  "kitUseTemplate": {
+    "message": "Zastosuj szablon do tekstu"
+  },
+  "kpFavorites": {
+    "message": "Kinopoisk: Ulubione"
+  },
+  "kpFolderId": {
+    "message": "ID kategorii kinopoisk.ru"
+  },
+  "kpInCinema": {
+    "message": "Teraz w kinie"
+  },
+  "kpPopular": {
+    "message": "Filmy"
+  },
+  "kpSeries": {
+    "message": "Seriale"
+  },
+  "loadMore": {
+    "message": "Załaduj więcej"
+  },
+  "login": {
+    "message": "Zaloguj"
+  },
+  "main": {
+    "message": "Główna"
+  },
+  "mainPage": {
+    "message": "Strona główna"
+  },
+  "manageProfile": {
+    "message": "Edycja listy"
+  },
+  "manageProfiles": {
+    "message": "Zarządzaj listami"
+  },
+  "move": {
+    "message": "Przenieś"
+  },
+  "newProfile": {
+    "message": "Utwórz listę"
+  },
+  "options": {
+    "message": "Opcje"
+  },
+  "originalPosterName": {
+    "message": "Pokazuj oryginalne nazwy"
+  },
+  "originalTitle": {
+    "message": "Oryginalny tytuł"
+  },
+  "peerFilterLabel": {
+    "message": "Pobierający"
+  },
+  "quickSearch": {
+    "message": "Szybkie wyszukiwanie"
+  },
+  "rangeFromPlaceholder": {
+    "message": "od"
+  },
+  "rangeToPlaceholder": {
+    "message": "do"
+  },
+  "readMore": {
+    "message": "Czytaj więcej"
+  },
+  "removeFromFavorite": {
+    "message": "Usuń z ulubionych"
+  },
+  "requestQueryDescription": {
+    "message": "Pobierz opis zapytania z Google"
+  },
+  "row_date": {
+    "message": "Data"
+  },
+  "row_peers": {
+    "message": "Pobierający"
+  },
+  "row_peers__short": {
+    "message": "P"
+  },
+  "row_quality": {
+    "message": "Jakość"
+  },
+  "row_quality__short": {
+    "message": "Q"
+  },
+  "row_seeds": {
+    "message": "Udostępniający"
+  },
+  "row_seeds__short": {
+    "message": "S"
+  },
+  "row_size": {
+    "message": "Rozmiar"
+  },
+  "row_title": {
+    "message": "Tytuł"
+  },
+  "save": {
+    "message": "Zapisz"
+  },
+  "scrollTop": {
+    "message": "Do góry!"
+  },
+  "search": {
+    "message": "Szukaj"
+  },
+  "searchPlaceholder": {
+    "message": "Wpisz zapytanie"
+  },
+  "seedFilterLabel": {
+    "message": "Liczba seedów"
+  },
+  "setupView": {
+    "message": "Dostosuj widok"
+  },
+  "showSections": {
+    "message": "Pokaż sekcje:"
+  },
+  "sizeFilterLabel": {
+    "message": "Rozmiar GB"
+  },
+  "singleResultTable": {
+    "message": "Połącz wyniki w jedną tabelę"
+  },
+  "sources": {
+    "message": "Źródła"
+  },
+  "syncProfiles": {
+    "message": "Synchronizuj listy trackerów"
+  },
+  "timeFilter1h": {
+    "message": "Za godzinę"
+  },
+  "timeFilter1m": {
+    "message": "Za miesiąc"
+  },
+  "timeFilter1w": {
+    "message": "Za tydzień"
+  },
+  "timeFilter1y": {
+    "message": "Za rok"
+  },
+  "timeFilter24h": {
+    "message": "Za dobę"
+  },
+  "timeFilter72h": {
+    "message": "Za 3 dni"
+  },
+  "timeFilterAll": {
+    "message": "Za cały czas"
+  },
+  "timeFilterLabel": {
+    "message": "Data"
+  },
+  "timeFilterRange": {
+    "message": "Za okres..."
+  },
+  "title": {
+    "message": "Tytuł"
+  },
+  "update": {
+    "message": "Aktualizuj"
+  },
+  "wordFilterLabel": {
+    "message": "Filtruj słowa"
+  },
+  "kitPreview": {
+    "message": "Podgląd"
+  },
+  "add_repository": {
+    "message": "Dodaj repozytorium"
+  },
+  "repositories": {
+    "message": "Repozytoria"
+  },
+  "refresh": {
+    "message": "Odśwież"
+  }
+}

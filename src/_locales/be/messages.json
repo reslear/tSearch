@@ -1,0 +1,521 @@
+{
+  "add": {
+    "message": "Дадаць"
+  },
+  "addInFavorite": {
+    "message": "У абраныя"
+  },
+  "addTrackerCode": {
+    "message": "Дадаць код"
+  },
+  "advanced_options": {
+    "message": "Разгорнуты выгляд"
+  },
+  "autoUpdate": {
+    "message": "Аўтаматычнае абнаўленне"
+  },
+  "backupRestore": {
+    "message": "Рэзервовае капіраванне / Аднаўленне"
+  },
+  "basic": {
+    "message": "Асноўныя"
+  },
+  "cancel": {
+    "message": "Скасаваць"
+  },
+  "categoryAll": {
+    "message": "Усе"
+  },
+  "categoryAnime": {
+    "message": "Анімэ"
+  },
+  "categoryBooks": {
+    "message": "Кнігі"
+  },
+  "categoryCartoons": {
+    "message": "Мультфільмы"
+  },
+  "categoryDocumentary": {
+    "message": "Дакументальнае"
+  },
+  "categoryFilms": {
+    "message": "Фільмы"
+  },
+  "categoryGames": {
+    "message": "Гульні"
+  },
+  "categoryHumor": {
+    "message": "Гумар"
+  },
+  "categoryMusic": {
+    "message": "Музыка"
+  },
+  "categoryOther": {
+    "message": "Іншае"
+  },
+  "categorySerials": {
+    "message": "Серыял"
+  },
+  "categorySoft": {
+    "message": "ПЗ"
+  },
+  "categorySport": {
+    "message": "Спорт"
+  },
+  "categoryWordFilter": {
+    "message": "Улічваць катэгорыю пры фільтрацыі слоў"
+  },
+  "categoryXXX": {
+    "message": "XXX"
+  },
+  "change": {
+    "message": "Змяніць"
+  },
+  "clear": {
+    "message": "Ачысціць"
+  },
+  "close": {
+    "message": "Зачыніць"
+  },
+  "contextMenu": {
+    "message": "Дадаць пошук у кантэкстнае меню"
+  },
+  "contextMenuTitle": {
+    "message": "Знайсці торэнт"
+  },
+  "createCode": {
+    "message": "Стварыць код"
+  },
+  "default": {
+    "message": "Па змаўчанні"
+  },
+  "defaultProfileName": {
+    "message": "Стандартны"
+  },
+  "defineCategory": {
+    "message": "Аўтаматычна вызначаць катэгорыю раздачы"
+  },
+  "descUrl": {
+    "message": "URL апісання"
+  },
+  "disablePopup": {
+    "message": "Не паказваць акно пошуку пры націску значка пашырэння"
+  },
+  "edit": {
+    "message": "Рэдагаваць"
+  },
+  "enableProxy": {
+    "message": "Уключыць падтрымку проксі"
+  },
+  "enterTrackerCode": {
+    "message": "Устаўце код трэкеру:"
+  },
+  "exportZip": {
+    "message": "Экспарт у ZIP-файл"
+  },
+  "extDesc": {
+    "message": "Torrents MultiSearch - пошук па некалькіх трэкерах адразу!"
+  },
+  "extName": {
+    "message": "TMS - Пошук торэнтаў"
+  },
+  "favoriteSync": {
+    "message": "Сінхранізаваць спіс абранага"
+  },
+  "favorites": {
+    "message": "Абранае"
+  },
+  "filter_all": {
+    "message": "Усе"
+  },
+  "filter_selected": {
+    "message": "Абраныя"
+  },
+  "filter_withoutList": {
+    "message": "Без спісу"
+  },
+  "fetchMeta": {
+    "message": "Атрымаць метаданыя"
+  },
+  "ggGamesNew": {
+    "message": "Гульні: Новыя"
+  },
+  "ggGamesTop": {
+    "message": "Гульні: Лепшыя"
+  },
+  "goToTheWebsite": {
+    "message": "Перайсці на сайт"
+  },
+  "hidePeerRow": {
+    "message": "Схаваць слупок \"перы\" (загрузка)"
+  },
+  "hideSeedRow": {
+    "message": "Схаваць слупок \"сідэры\" (раздача)"
+  },
+  "history": {
+    "message": "Гісторыя"
+  },
+  "historyEmpty": {
+    "message": "Пакуль што тут пусто..."
+  },
+  "imageUrl": {
+    "message": "URL выявы"
+  },
+  "imdbInCinema": {
+    "message": "IMDB: Цяпер у кіно"
+  },
+  "imdbPopular": {
+    "message": "IMDB: Фільмы"
+  },
+  "imdbSeries": {
+    "message": "IMDB: Серыялы"
+  },
+  "importZip": {
+    "message": "Імпарт з ZIP-файла"
+  },
+  "invertIcon": {
+    "message": "Інвертаваць колер значка пашырэння"
+  },
+  "kitAddTime": {
+    "message": "Час дадання"
+  },
+  "kitAttribute": {
+    "message": "Атрыбут"
+  },
+  "kitBaseUrl": {
+    "message": "Асноўны URL"
+  },
+  "kitCategoryLink": {
+    "message": "Спасылка на катэгорыю"
+  },
+  "kitCategoryName": {
+    "message": "Катэгорыя"
+  },
+  "kitConvert": {
+    "message": "Канвертацыя"
+  },
+  "kitConvertToNumber": {
+    "message": "Пераўтварыць у лік"
+  },
+  "kitConvertedString": {
+    "message": "Пераўтвораны радок"
+  },
+  "kitDesc": {
+    "message": "Апісанне"
+  },
+  "kitGetCode": {
+    "message": "Атрымаць код"
+  },
+  "kitIcon": {
+    "message": "Іконка трэкера (16x16)"
+  },
+  "kitLogin": {
+    "message": "Аўтарызацыя"
+  },
+  "kitLoginFormSelector": {
+    "message": "Селектар формы аўтарызацыі"
+  },
+  "kitLoginUrl": {
+    "message": "URL старонкі аўтарызацыі"
+  },
+  "kitNextPageLink": {
+    "message": "Спасылка на наступную старонку"
+  },
+  "kitOpen": {
+    "message": "Адкрыць"
+  },
+  "kitOpenQuery": {
+    "message": "Пошукавы запыт"
+  },
+  "kitPageCharset": {
+    "message": "Кадзіроўка старонкі"
+  },
+  "kitPeerCount": {
+    "message": "Колькасць піроў"
+  },
+  "kitPostBody": {
+    "message": "POST запыт"
+  },
+  "kitQuery": {
+    "message": "Пошукавы запыт (карыстайцеся %search% як шаблонам)"
+  },
+  "kitReadCode": {
+    "message": "Чытаць код"
+  },
+  "kitRegexpPattern": {
+    "message": "Regexp шаблон"
+  },
+  "kitReplaceMonth": {
+    "message": "Замяняць назвы месяцаў на лічбы"
+  },
+  "kitReplaceString": {
+    "message": "замяняецца радком"
+  },
+  "kitReplaceToday": {
+    "message": "Замяняць словы зараз\\сёння\\учора на дату"
+  },
+  "kitResult": {
+    "message": "Вынік"
+  },
+  "kitRowSelector": {
+    "message": "Селектар радка"
+  },
+  "kitSaveLoad": {
+    "message": "Захаваць / Загрузіць"
+  },
+  "kitSearch": {
+    "message": "Пошук"
+  },
+  "kitSearchMethod": {
+    "message": "Метад"
+  },
+  "kitSearchQueryEncoding": {
+    "message": "Кадзіроўка пошукавага запыту"
+  },
+  "kitSearchUrl": {
+    "message": "URL старонкі пошуку"
+  },
+  "kitSeedCount": {
+    "message": "Колькасць сідэраў"
+  },
+  "kitSelect": {
+    "message": "Абраць"
+  },
+  "kitSelectors": {
+    "message": "Селектары"
+  },
+  "kitSkip": {
+    "message": "Прапусціць радкі"
+  },
+  "kitSkipEnd": {
+    "message": "З канца"
+  },
+  "kitSkipFirstRows": {
+    "message": "Прапусціць першыя N радкоў"
+  },
+  "kitSkipLastRows": {
+    "message": "Прапусціць апошнія N радкоў"
+  },
+  "kitSkipTop": {
+    "message": "З пачатку"
+  },
+  "kitSourceString": {
+    "message": "Пачатковы радок"
+  },
+  "kitTableRow": {
+    "message": "Радок табліцы"
+  },
+  "kitTorrentDownloadLink": {
+    "message": "Спасылка на загрузку"
+  },
+  "kitTorrentLink": {
+    "message": "Спасылка на раздачу"
+  },
+  "kitTorrentSize": {
+    "message": "Памер торэнта"
+  },
+  "kitTorrentTitle": {
+    "message": "Назва торэнта"
+  },
+  "kitTrackerCodeReadError": {
+    "message": "Памылка разбору кода трэкера"
+  },
+  "kitTrackerDesc": {
+    "message": "Апісанне трэкера"
+  },
+  "kitTrackerIsDownloadUrl": {
+    "message": "URL загрузкі"
+  },
+  "kitTrackerTitle": {
+    "message": "Назва трэкера"
+  },
+  "kitTrackerUpdateUrl": {
+    "message": "URL для абнаўлення"
+  },
+  "kitTrackerUrl": {
+    "message": "URL"
+  },
+  "kitTrackerVersion": {
+    "message": "Версія"
+  },
+  "kitUseTemplate": {
+    "message": "Ужыць шаблон да радка"
+  },
+  "kpFavorites": {
+    "message": "Kinopoisk: Абранае"
+  },
+  "kpFolderId": {
+    "message": "ID катэгорыі Kinopoisk"
+  },
+  "kpInCinema": {
+    "message": "Зараз у кіно"
+  },
+  "kpPopular": {
+    "message": "Фільмы"
+  },
+  "kpSeries": {
+    "message": "Серыялы"
+  },
+  "loadMore": {
+    "message": "Загрузіць яшчэ"
+  },
+  "login": {
+    "message": "Увайсці"
+  },
+  "main": {
+    "message": "Галоўная"
+  },
+  "mainPage": {
+    "message": "Галоўная старонка"
+  },
+  "manageProfile": {
+    "message": "Рэдагаванне спісу"
+  },
+  "manageProfiles": {
+    "message": "Кіраванне спісамі"
+  },
+  "move": {
+    "message": "Перамясціць"
+  },
+  "newProfile": {
+    "message": "Стварыць спіс"
+  },
+  "options": {
+    "message": "Налады"
+  },
+  "originalPosterName": {
+    "message": "Паказваць арыгінальныя назвы"
+  },
+  "originalTitle": {
+    "message": "Арыгінальная назва"
+  },
+  "peerFilterLabel": {
+    "message": "Піры"
+  },
+  "quickSearch": {
+    "message": "Хуткі пошук"
+  },
+  "rangeFromPlaceholder": {
+    "message": "ад"
+  },
+  "rangeToPlaceholder": {
+    "message": "да"
+  },
+  "readMore": {
+    "message": "Больш"
+  },
+  "removeFromFavorite": {
+    "message": "Выдаліць з абранага"
+  },
+  "requestQueryDescription": {
+    "message": "Атрымаць апісанне пошукавага запыту з Google"
+  },
+  "row_date": {
+    "message": "Дадзена"
+  },
+  "row_peers": {
+    "message": "Піры (скачваюць)"
+  },
+  "row_peers__short": {
+    "message": "П"
+  },
+  "row_quality": {
+    "message": "Якасць"
+  },
+  "row_quality__short": {
+    "message": "Я"
+  },
+  "row_seeds": {
+    "message": "Сідэры (раздаюць)"
+  },
+  "row_seeds__short": {
+    "message": "С"
+  },
+  "row_size": {
+    "message": "Памер"
+  },
+  "row_title": {
+    "message": "Назва"
+  },
+  "save": {
+    "message": "Захаваць"
+  },
+  "scrollTop": {
+    "message": "Уверх!"
+  },
+  "search": {
+    "message": "Пошук"
+  },
+  "searchPlaceholder": {
+    "message": "Увядзіце пошукавы запыт"
+  },
+  "seedFilterLabel": {
+    "message": "Сідэры"
+  },
+  "setupView": {
+    "message": "Наладзіць выгляд"
+  },
+  "showSections": {
+    "message": "Паказваць раздзелы:"
+  },
+  "sizeFilterLabel": {
+    "message": "Памер ГБ"
+  },
+  "singleResultTable": {
+    "message": "Аб'яднаць вынікі пошуку ў адну табліцу"
+  },
+  "sources": {
+    "message": "Крыніцы"
+  },
+  "syncProfiles": {
+    "message": "Сінхранізаваць спісы трэкераў"
+  },
+  "timeFilter1h": {
+    "message": "За гадзіну"
+  },
+  "timeFilter1m": {
+    "message": "За месяц"
+  },
+  "timeFilter1w": {
+    "message": "За тыдзень"
+  },
+  "timeFilter1y": {
+    "message": "За год"
+  },
+  "timeFilter24h": {
+    "message": "За суткі"
+  },
+  "timeFilter72h": {
+    "message": "За 3 дні"
+  },
+  "timeFilterAll": {
+    "message": "За ўвесь час"
+  },
+  "timeFilterLabel": {
+    "message": "Дата"
+  },
+  "timeFilterRange": {
+    "message": "За перыяд..."
+  },
+  "title": {
+    "message": "Назва"
+  },
+  "update": {
+    "message": "Абнавіць"
+  },
+  "wordFilterLabel": {
+    "message": "Фільтр слоў"
+  },
+  "kitPreview": {
+    "message": "Папярэдні прагляд"
+  },
+  "add_repository": {
+    "message": "Дадаць рэпазіторый"
+  },
+  "repositories": {
+    "message": "Рэпазіторыі"
+  },
+  "refresh": {
+    "message": "Абнавіць"
+  }
+}
