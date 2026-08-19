@@ -2,9 +2,9 @@
   "name": "tms",
   "version": "1.0.0",
   "scripts": {
-    "buildExplorersJson": "node ./builder/buildExplorersJson.js",
-    "buildTrackersJson": "node ./builder/buildTrackersJson.js",
-    "compress": "node ./builder/compressDist",
+    "buildExplorersJson": "node ./builder/buildExplorersJson.mjs",
+    "buildTrackersJson": "node ./builder/buildTrackersJson.mjs",
+    "compress": "node ./builder/compressDist.mjs",
     "build:vite": "vite build --mode production",
     "watch:vite": "vite build --mode development --watch",
     "watch": "npm run watch:vite",

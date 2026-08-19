@@ -1,7 +1,7 @@
-require('./defaultBuildEnv');
-const path = require('path');
-const fs = require('fs');
-const archiver = require('archiver');
+import path from 'node:path';
+import fs from 'node:fs';
+import archiver from 'archiver';
+import { BUILD_ENV } from './defaultBuildEnv.mjs';
 
 const compressDist = () => {
   const ext = 'zip';
@@ -25,7 +25,7 @@ const compressDist = () => {
     });
 
     zipArchive.finalize(function(err, bytes) {
-      if(err) {
+      if (err) {
         callback(err);
       }
     });
@@ -34,7 +34,7 @@ const compressDist = () => {
   return new Promise((resolve, reject) => {
     zipFolder(dist, path.join(outputPath, `${BUILD_ENV.distName}.${ext}`), err => {
       err ? reject(err) : resolve();
-    })
+    });
   });
 };
 

@@ -1,17 +1,18 @@
-require('./defaultBuildEnv');
+import { readdir, readFile, writeFile } from 'node:fs/promises';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { pathToFileURL } from 'node:url';
 
-const {readdir, readFile, writeFile} = require('node:fs/promises');
-const {resolve} = require('node:path');
-const {pathToFileURL} = require('node:url');
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const loadGetTrackerCodeMeta = async () => {
-  const modulePath = pathToFileURL(resolve(__dirname, '../src/tools/getTrackerCodeMeta.js')).href;
+  const modulePath = pathToFileURL(path.resolve(__dirname, '../src/tools/getTrackerCodeMeta.js')).href;
   return (await import(modulePath)).default;
 };
 
 const buildTrackersJson = async () => {
   const getTrackerCodeMeta = await loadGetTrackerCodeMeta();
-  const place = resolve(__dirname, '../src/trackers');
+  const place = path.resolve(__dirname, '../src/trackers');
   const files = await readdir(place);
 
   const trackerIds = files
@@ -19,7 +20,7 @@ const buildTrackersJson = async () => {
     .map(filename => filename.slice(0, -3));
 
   const results = await Promise.all(trackerIds.sort().map(async (id) => {
-    const code = await readFile(resolve(place, `${id}.js`));
+    const code = await readFile(path.resolve(place, `${id}.js`));
     return {id, version: getTrackerCodeMeta(code.toString()).version};
   }));
 
@@ -29,7 +30,7 @@ const buildTrackersJson = async () => {
   });
 
   await writeFile(
-    resolve(__dirname, '../src/trackers.json'),
+    path.resolve(__dirname, '../src/trackers.json'),
     `${JSON.stringify(trackers, null, 2)}\n`
   );
 };
