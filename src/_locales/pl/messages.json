@@ -538,5 +538,8 @@
   },
   "refresh": {
     "message": "Odśwież"
+  },
+  "proxyEnabled": {
+    "message": "Używaj proxy trackerów do omijania blokad (RuTracker, PiratBit)"
   }
 }

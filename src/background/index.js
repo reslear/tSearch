@@ -11,7 +11,7 @@ import getExploreModuleCodeMeta from "../tools/getExploreModuleCodeMeta";
 import storageGet from "../tools/storageGet";
 import storageSet from "../tools/storageSet";
 import TabFetchBg from "./tabFetchBg";
-import initRutrackerProxy from "./rutrackerProxy";
+import initTrackerProxy, {setProxyEnabled} from "./trackerProxy";
 import migrate from "../tools/migrate";
 import jsonCodeToUserscript from "../tools/jsonCodeToUserscript";
 import setCodeMeta from "../tools/setCodeMeta";
@@ -47,6 +47,10 @@ optionsStore.fetchOptions().then(() => {
 
   autorun(() => {
     setPopupMenu(optionsStore.options.disablePopup);
+  });
+
+  autorun(() => {
+    setProxyEnabled(optionsStore.options.proxyEnabled);
   });
 });
 
@@ -91,11 +95,11 @@ const syncExtensionHeaderRules = () => {
 syncExtensionHeaderRules();
 
 /**
- * Cloudflare answers extension requests to rutracker.org with a JS challenge that
- * `fetch` cannot solve. Routing those domains through the official add-on's proxy is
- * the only working bypass, see ./rutrackerProxy.
+ * Some trackers are unreachable directly (Cloudflare JS challenge on rutracker.org,
+ * ISP blocks elsewhere). Routing just their hosts through the official add-on proxies
+ * is the only working bypass, see ./trackerProxy.
  */
-initRutrackerProxy();
+initTrackerProxy();
 
 chrome.omnibox.onInputEntered.addListener((query) => {
   openSearchPage(query);

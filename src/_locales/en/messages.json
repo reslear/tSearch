@@ -544,5 +544,8 @@
     },
     "kitPreview": {
         "message": "Preview"
+    },
+    "proxyEnabled": {
+        "message": "Use tracker proxies to bypass blocks (RuTracker, PiratBit)"
     }
 }

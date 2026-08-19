@@ -538,5 +538,8 @@
   },
   "refresh": {
     "message": "Абнавіць"
+  },
+  "proxyEnabled": {
+    "message": "Выкарыстоўваць проксі трэкераў для абыходу блакіровак (RuTracker, PiratBit)"
   }
 }

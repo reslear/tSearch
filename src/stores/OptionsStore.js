@@ -93,6 +93,7 @@ const ExplorerSectionsStore = types.model('ExplorerSectionsStore', {
  * @property {boolean} [contextMenu]
  * @property {boolean} [disablePopup]
  * @property {boolean} [invertIcon]
+ * @property {boolean} [proxyEnabled]
  * @property {boolean} [defineCategory]
  * @property {boolean} [singleResultTable]
  * @property {boolean} [requestQueryDescription]
@@ -112,6 +113,7 @@ const OptionsValueStore = types.model('OptionsValueStore', {
   contextMenu: types.optional(types.boolean, true),
   disablePopup: types.optional(types.boolean, false),
   invertIcon: types.optional(types.boolean, false),
+  proxyEnabled: types.optional(types.boolean, true),
   defineCategory: types.optional(types.boolean, true),
   singleResultTable: types.optional(types.boolean, false),
   requestQueryDescription: types.optional(types.boolean, true),

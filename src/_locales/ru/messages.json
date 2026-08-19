@@ -523,5 +523,8 @@
   },
   "kitPreview": {
     "message": "Предпросмотр"
+  },
+  "proxyEnabled": {
+    "message": "Использовать прокси трекеров для обхода блокировок (RuTracker, PiratBit)"
   }
 }

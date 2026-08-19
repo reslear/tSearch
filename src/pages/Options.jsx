@@ -94,6 +94,7 @@ class Options extends React.Component {
             <OptionCheckbox name={'defineCategory'}/>
             <OptionCheckbox name={'requestQueryDescription'}/>
             <OptionCheckbox name={'singleResultTable'}/>
+            <OptionCheckbox name={'proxyEnabled'}/>
           </div>
         );
         break;

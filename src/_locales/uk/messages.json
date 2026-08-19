@@ -526,5 +526,8 @@
    },
    "singleResultTable": {
         "message": "Об'єднати результати пошуку в єдину таблицю"
+   },
+   "proxyEnabled": {
+      "message": "Використовувати проксі трекерів для обходу блокувань (RuTracker, PiratBit)"
    }
 }
