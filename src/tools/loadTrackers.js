@@ -6,10 +6,10 @@ const debug = getLogger('loadTrackers');
 const loadTrackers = () => {
   return Promise.all([
     'bitsnoop', 'booktracker', 'brodim', 'extratorrent',
-    'filebase', 'freeTorrents', 'hdclub', 'inmac',
-    'kinozal', 'megashara', 'mininova', 'nnmclub',
+    'filebase', 'freeTorrents', 'hdclub', 'inmac', 'kinozal',
+    'megashara', 'mininova', 'nnmclub',
     'opentorrent', 'piratebit', 'rgfootball', 'rutor',
-    'rutracker', 'tapochek', 'tfile', 'thepiratebay'
+    'rutracker', 'tapochek', 'thepiratebay'
   ].map(id => {
     return fetch('./trackers/' + id + '.js').then(response => {
       return response.text();

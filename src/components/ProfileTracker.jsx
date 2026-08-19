@@ -4,6 +4,7 @@ import getTrackerIconClassName from "../tools/getTrackerIconClassName";
 import blankSvg from "../assets/img/blank.svg";
 import PropTypes from "prop-types";
 
+@inject('rootStore')
 @observer
 class ProfileTracker extends React.Component {
   static propTypes = {
@@ -15,6 +16,21 @@ class ProfileTracker extends React.Component {
     return this.props.profileTrackerStore;
   }
 
+  get searchStore() {
+    const searches = this.props.rootStore.searches;
+    const len = searches.length;
+    if (len) {
+      return searches[len - 1];
+    }
+  }
+
+  get trackerSearchStore() {
+    const searchStore = this.searchStore;
+    if (searchStore) {
+      return searchStore.trackerSearch.get(this.profileTrackerStore.id);
+    }
+  }
+
   /**@return TrackerStore*/
   get trackerStore() {
     return this.profileTrackerStore.tracker;
@@ -23,10 +39,14 @@ class ProfileTracker extends React.Component {
   render() {
     if (!this.trackerStore) {
       const name = this.profileTrackerStore.meta.name || 'Not found';
+      const trackerSearchStore = this.trackerSearchStore;
+      const disabledReason = this.props.rootStore.options.options.trackerHealth &&
+        this.props.rootStore.options.options.trackerHealth.getTrackerDisableReason(this.profileTrackerStore.id);
+      const iconTitle = trackerSearchStore && trackerSearchStore.errorReason || disabledReason || 'Not found';
       return (
         <div className="tracker">
-          <div className="tracker__icon tracker__icon-error"/>
-          {name}
+          <div className="tracker__icon tracker__icon-error" title={iconTitle}/>
+          <span className="tracker__name">{name}</span>
         </div>
       );
     }
@@ -79,6 +99,18 @@ class Tracker extends React.Component {
     }
   }
 
+  get isTrackerDisabled() {
+    const options = this.rootStore.options.options;
+    return options && options.trackerHealth && options.trackerHealth.isTrackerDisabled(this.trackerStore.id);
+  }
+
+  get trackerDisableReason() {
+    const options = this.rootStore.options.options;
+    if (options && options.trackerHealth) {
+      return options.trackerHealth.getTrackerDisableReason(this.trackerStore.id);
+    }
+  }
+
   componentDidMount() {
     this.trackerStore.attach();
     this.trackerStore.setProfileOptions(this.profileTrackerStore.options);
@@ -106,6 +138,9 @@ class Tracker extends React.Component {
     iconClassList.push(getTrackerIconClassName(tracker.id));
 
     const trackerSearchStore = this.trackerSearchStore;
+    if (this.isTrackerDisabled) {
+      iconClassList.push('tracker__icon-error');
+    }
     if (trackerSearchStore) {
       if (trackerSearchStore.state === 'pending') {
         iconClassList.push('tracker__icon-loading');
@@ -115,15 +150,17 @@ class Tracker extends React.Component {
       }
     }
 
+    const errorTitle = trackerSearchStore && trackerSearchStore.errorReason || this.trackerDisableReason;
+
     let icon = null;
     if (tracker.meta.trackerURL) {
       iconClassList.push('tracker__link');
       icon = (
-        <a className={iconClassList.join(' ')} target="_blank" href={tracker.meta.trackerURL}/>
+        <a className={iconClassList.join(' ')} target="_blank" href={tracker.meta.trackerURL} title={errorTitle}/>
       );
     } else {
       icon = (
-        <div className={iconClassList.join(' ')}/>
+        <div className={iconClassList.join(' ')} title={errorTitle}/>
       );
     }
 
@@ -133,6 +170,11 @@ class Tracker extends React.Component {
         searchState = (
           <a className="tracker__login" target="_blank" href={trackerSearchStore.authRequired.url}
              title={chrome.i18n.getMessage('login')}/>
+        );
+      } else
+      if (trackerSearchStore.state === 'error') {
+        searchState = (
+          <div className="tracker__counter tracker__counter-error" title={errorTitle}>{'!'}</div>
         );
       } else {
         const count = this.searchStore.getResultCountByTrackerId(tracker.id);
@@ -148,6 +190,11 @@ class Tracker extends React.Component {
           <div className="tracker__counter">{text}</div>
         )
       }
+    } else
+    if (this.isTrackerDisabled) {
+      searchState = (
+        <div className="tracker__counter tracker__counter-error" title={errorTitle}>{'!'}</div>
+      );
     }
 
     const iconUrl = tracker.getIconUrl() || blankSvg;

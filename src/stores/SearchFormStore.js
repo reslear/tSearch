@@ -38,7 +38,7 @@ const SearchForm = types.model('SearchForm', {
   const fetchGoogleSuggestions = value => {
     const controller = new AbortController();
 
-    const promise = fetch('http://suggestqueries.google.com/complete/search?' + qs.stringify({
+    const promise = fetch('https://suggestqueries.google.com/complete/search?' + qs.stringify({
       client: 'firefox',
       q: value
     }), {

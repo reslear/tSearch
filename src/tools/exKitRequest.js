@@ -39,12 +39,7 @@ const exKitRequest = (tracker, options) => {
     throw new ErrorWithCode(`Connection is not allowed! ${origin} Add url patter in @connect!`, 'ORIGIN_IS_NOT_AVAILABLE');
   }
 
-  let request = null;
-  if (tracker.profileOptions.enableProxy) {
-    request = tabFetchRequest(originUrl || origin, url, fetchOptions);
-  } else {
-    request = fetchRequest(url, fetchOptions);
-  }
+  const request = requestWithFallback(tracker, origin, originUrl, url, fetchOptions);
 
   tracker.requests.push(request);
 
@@ -79,6 +74,73 @@ const exKitRequest = (tracker, options) => {
     tracker.requests.splice(tracker.requests.indexOf(request), 1);
     throw err;
   });
+};
+
+/**
+ * Status codes used by anti-bot protection when a direct request is rejected.
+ * Used as a fallback when the response carries no explicit challenge marker.
+ * @type {number[]}
+ */
+const CHALLENGE_STATUS_CODES = [429, 503];
+
+/**
+ * Cloudflare marks a challenge page with `cf-mitigated: challenge`, see
+ * https://developers.cloudflare.com/cloudflare-challenges/challenge-types/challenge-pages/detect-response/
+ * Such a request can be repeated through a real tab, where the challenge
+ * can be solved and the clearance cookie is stored.
+ */
+const isChallengeError = (err) => {
+  if (!err || err.name !== 'StatusCodeError') {
+    return false;
+  }
+
+  const response = err.response;
+  if (response && response.headers && response.headers.get('cf-mitigated') === 'challenge') {
+    return true;
+  }
+
+  return CHALLENGE_STATUS_CODES.indexOf(err.statusCode) !== -1;
+};
+
+/**
+ * Performs a direct request and, if it is blocked by anti-bot protection,
+ * retries it through a real tab (tabFetch), where the site cookies and
+ * challenge cookies are available.
+ */
+const requestWithFallback = (tracker, origin, originUrl, url, fetchOptions) => {
+  if (tracker.profileOptions.enableProxy) {
+    return tabFetchRequest(originUrl || origin, url, fetchOptions);
+  }
+
+  let aborted = false;
+  let activeRequest = fetchRequest(url, fetchOptions);
+
+  const request = activeRequest.catch((err) => {
+    if (aborted || !isChallengeError(err)) {
+      throw err;
+    }
+
+    logger.warn('Direct request is blocked, retry through tab', url, err.statusCode);
+
+    activeRequest = tabFetchRequest(originUrl || origin, url, fetchOptions);
+    return activeRequest.catch((proxyErr) => {
+      throw new ErrorWithCode(
+        `Request is blocked by ${origin} (${err.statusCode}). ` +
+        `Open ${origin} in a tab, pass the check, or enable proxy in the profile options. ` +
+        `(${proxyErr.message})`,
+        'REQUEST_IS_BLOCKED'
+      );
+    });
+  });
+
+  request.abort = () => {
+    aborted = true;
+    if (activeRequest && activeRequest.abort) {
+      activeRequest.abort();
+    }
+  };
+
+  return request;
 };
 
 const tabFetchRequest = (origin, url, fetchOptions) => {
@@ -143,6 +205,8 @@ const fetchRequest = (url, fetchOptions) => {
     method: fetchOptions.method,
     headers: fetchOptions.headers,
     body: fetchOptions.body,
+    // Send tracker cookies (session, cf_clearance), otherwise every request is anonymous
+    credentials: 'include',
     signal: controller.signal
   }).then(response => {
     if (!response.ok) {

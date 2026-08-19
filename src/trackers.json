@@ -2,9 +2,9 @@
   "booktracker": "1.0.2",
   "brodim": "1.0.2",
   "extratorrent": "1.0.3",
+  "kinozal": "1.0.4",
   "filebase": "1.0.2",
   "inmac": "1.0.2",
-  "kinozal": "1.0.3",
   "megashara": "1.0.2",
   "nnmclub": "1.1.0",
   "opentorrent": "1.0.2",
@@ -13,6 +13,5 @@
   "rutor": "1.0.4",
   "rutracker": "1.0.6",
   "tapochek": "1.0.4",
-  "tfile": "1.0.2",
   "thepiratebay": "1.0.2"
 }

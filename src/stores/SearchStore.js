@@ -25,6 +25,7 @@ const logger = getLogger('SearchStore');
  * @property {*} query
  * @property {*} queryHighlightMap
  * @property {*} queryRateScheme
+ * @property {string|undefined|null} errorReason
  */
 const TrackerSearchStore = types.model('TrackerSearchStore', {
   id: types.string,
@@ -33,6 +34,7 @@ const TrackerSearchStore = types.model('TrackerSearchStore', {
   authRequired: types.maybe(types.model({
     url: types.maybeNull(types.string)
   })),
+  errorReason: types.maybe(types.string),
 }).actions((self) => {
   let urlSet = null;
   return {
@@ -40,7 +42,10 @@ const TrackerSearchStore = types.model('TrackerSearchStore', {
       const {id, queryHighlightMap, queryRateScheme} = self;
       const /**RootStore*/rootStore = getParentOfType(self, RootStore);
       const defineCategory = rootStore.options.options.defineCategory;
+      const trackerHealth = rootStore.options.options.trackerHealth;
       self.state = 'pending';
+      self.authRequired = undefined;
+      self.errorReason = undefined;
       try {
         const tracker = self.tracker;
         if (!tracker) {
@@ -63,20 +68,31 @@ const TrackerSearchStore = types.model('TrackerSearchStore', {
         if (isAlive(self)) {
           self.nextQuery = result.nextPageRequest;
           self.state = 'done';
+          self.errorReason = undefined;
+          if (trackerHealth && trackerHealth.enableTracker(id)) {
+            rootStore.options.save();
+          }
         }
         return prepSearchResults(id, queryHighlightMap, queryRateScheme, result.results, defineCategory, urlSet);
       } catch (err) {
         if (isAlive(self)) {
           self.state = 'error';
+          self.errorReason = err && err.message ? err.message : String(err || 'Search error');
         }
         if (err.code === 'AUTH_REQUIRED') {
           if (isAlive(self)) {
             self.authRequired = {
               url: err.url
             };
+            if (trackerHealth && trackerHealth.enableTracker(id)) {
+              rootStore.options.save();
+            }
           }
         } else {
           logger.error(`[${id}] searchWrapper error`, err);
+          if (trackerHealth && trackerHealth.disableTracker(id, self.errorReason)) {
+            rootStore.options.save();
+          }
         }
       }
     }),
@@ -174,6 +190,11 @@ const SearchStore = types.model('SearchStore', {
       self.state = 'pending';
       try {
         const /**RootStore*/rootStore = getParentOfType(self, RootStore);
+        const selectedTrackerIds = rootStore.profiles.prepSelectedTrackerIds.filter((trackerId) => {
+          const trackerHealth = rootStore.options.options.trackerHealth;
+          if (!trackerHealth) return true;
+          return !trackerHealth.isTrackerDisabled(trackerId);
+        });
 
         let page = null;
         if (self.pages.length && rootStore.options.options.singleResultTable) {
@@ -186,7 +207,7 @@ const SearchStore = types.model('SearchStore', {
           self.pages.push(page);
         }
 
-        yield Promise.all(rootStore.profiles.prepSelectedTrackerIds.map(trackerId => {
+        yield Promise.all(selectedTrackerIds.map(trackerId => {
           const trackerSearch = self.createTrackerSearch(trackerId);
           return serachFn(trackerSearch).then((results) => {
             if (isAlive(self)) {
@@ -284,6 +305,10 @@ const SearchStore = types.model('SearchStore', {
       const prepSelectedTrackerIds = rootStore.profiles.prepSelectedTrackerIds;
       for (let trackerSearch of self.trackerSearch.values()) {
         if (trackerSearch.nextQuery) {
+          const trackerHealth = rootStore.options.options.trackerHealth;
+          if (trackerHealth && trackerHealth.isTrackerDisabled(trackerSearch.id)) {
+            continue;
+          }
           if (prepSelectedTrackerIds.indexOf(trackerSearch.id) !== -1) {
             return true;
           }

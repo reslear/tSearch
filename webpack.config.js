@@ -89,7 +89,7 @@ const uiConfig = {
       {from: './src/assets/img', to: './assets/img'},
       {from: './src/assets/icons', to: './assets/icons'},
       {from: './src/_locales', to: './_locales'},
-      {from: './src/trackers', to: './trackers'},
+      {from: './src/trackers', to: './trackers', ignore: ['_disabled/**']},
       {from: './src/explorerModules', to: './explorerModules'},
     ]),
     new MiniCssExtractPlugin({

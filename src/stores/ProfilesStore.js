@@ -154,22 +154,12 @@ const ProfilesStore = types.model('ProfilesStore', {
 });
 
 const getDefaultProfile = () => {
+  const trackersJson = require('../trackers.json');
+  const trackerIds = Object.keys(trackersJson).map((id) => ({id}));
   return {
     id: 'default',
     name: 'Default',
-    trackers: [{
-      id: 'rutracker'
-    }, {
-      id: 'nnmclub'
-    }, {
-      id: 'kinozal'
-    }, {
-      id: 'rutor'
-    }, {
-      id: 'tfile'
-    }, {
-      id: 'opentorrent'
-    }]
+    trackers: trackerIds,
   };
 };
 

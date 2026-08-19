@@ -57,3 +57,10 @@ ___
 
 Лицензия
 - См. `LICENSE.md`.
+
+___
+
+## Copyright & Credits
+
+Original project: [tSearch](https://github.com/Feverqwe/tSearch) by Anton, 2016  
+Fork: [tSearch-manifestv3](https://github.com/Feverqwe/tSearch) & reslear, 2026

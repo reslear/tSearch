@@ -1,10 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './assets/css/popup.less';
+import './assets/css/build-meta.less';
 import SearchForm from './components/SearchForm/SearchForm';
 import RootStore from "./stores/RootStore";
 import {Provider} from "mobx-react";
 import errorTracker from "./tools/errorTracker";
+import BuildMeta from './components/BuildMeta';
 
 errorTracker.bindExceptions();
 
@@ -26,6 +28,7 @@ class Popup extends React.Component {
     return (
       <div className="search">
         <SearchForm onSubmit={this.handleSubmit}/>
+        <BuildMeta/>
       </div>
     );
   }

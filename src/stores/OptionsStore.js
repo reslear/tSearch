@@ -10,6 +10,47 @@ const promiseLimit = require('promise-limit');
 const logger = getLogger('OptionsStore');
 const oneLimit = promiseLimit(1);
 
+/**
+ * @typedef {{}} TrackerHealthStore
+ * @property {Map<string, string>} [disabledTrackers]
+ * @property {function} disableTracker
+ * @property {function} enableTracker
+ * @property {function} isTrackerDisabled
+ * @property {function} getTrackerDisableReason
+ */
+const TrackerHealthStore = types.model('TrackerHealthStore', {
+  disabledTrackers: types.optional(types.map(types.string), {}),
+}).actions(self => {
+  return {
+    disableTracker(id, reason) {
+      const prevReason = self.disabledTrackers.get(id);
+      const normalizedReason = reason || 'Search error';
+      if (prevReason !== normalizedReason) {
+        self.disabledTrackers.set(id, normalizedReason);
+        return true;
+      }
+      return false;
+    },
+    enableTracker(id) {
+      const hadError = self.disabledTrackers.has(id);
+      if (hadError) {
+        self.disabledTrackers.delete(id);
+        return true;
+      }
+      return false;
+    }
+  };
+}).views(self => {
+  return {
+    isTrackerDisabled(id) {
+      return self.disabledTrackers.has(id);
+    },
+    getTrackerDisableReason(id) {
+      return self.disabledTrackers.get(id);
+    }
+  };
+});
+
 
 /**
  * @typedef {{}} ExplorerSectionsStore
@@ -62,6 +103,7 @@ const ExplorerSectionsStore = types.model('ExplorerSectionsStore', {
  * @property {ExplorerSectionsStore} [explorerSections]
  * @property {{by:string,[direction]:number}[]} [sorts]
  * @property {number} [trackerListHeight]
+ * @property {TrackerHealthStore} [trackerHealth]
  * @property {string[]} [repositories]
  * @property {function} setValue
  */
@@ -84,6 +126,7 @@ const OptionsValueStore = types.model('OptionsValueStore', {
     direction: types.optional(types.number, 0),
   })), [{by: 'quality'}]),
   trackerListHeight: types.optional(types.number, 200),
+  trackerHealth: types.optional(TrackerHealthStore, {}),
   repositories: types.optional(types.array(types.string), [
     'https://api.github.com/repos/feverqwe/tSearch/contents/external'
   ]),

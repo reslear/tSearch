@@ -26,6 +26,8 @@ const serializeError = require('serialize-error');
 
 const logger = getLogger('background');
 const oneLimit = promiseLimit(1);
+const runtimeRoot = (chrome.runtime && chrome.runtime.getURL) ? chrome.runtime.getURL('') : 'runtime unavailable';
+logger.info(`[tms] build v${BUILD_ENV.version} / ${BUILD_ENV.buildTime} / ${runtimeRoot}`);
 
 migrate();
 
@@ -47,6 +49,46 @@ optionsStore.fetchOptions().then(() => {
     setPopupMenu(optionsStore.options.disablePopup);
   });
 });
+
+/**
+ * Requests initiated by the extension carry `Origin: chrome-extension://<id>` and
+ * `Sec-Fetch-Site: none`, which anti-bot protection (Cloudflare & co) treats as a bot.
+ * Session rules strip those headers for our own requests only.
+ * @type {number}
+ */
+const EXTENSION_HEADERS_RULE_ID = 1;
+
+const syncExtensionHeaderRules = () => {
+  if (!chrome.declarativeNetRequest || !chrome.declarativeNetRequest.updateSessionRules) {
+    logger.warn('declarativeNetRequest is not available, request headers are not modified');
+    return Promise.resolve();
+  }
+
+  return chrome.declarativeNetRequest.updateSessionRules({
+    removeRuleIds: [EXTENSION_HEADERS_RULE_ID],
+    addRules: [{
+      id: EXTENSION_HEADERS_RULE_ID,
+      priority: 1,
+      action: {
+        type: 'modifyHeaders',
+        requestHeaders: [
+          {header: 'origin', operation: 'remove'},
+          {header: 'sec-fetch-site', operation: 'set', value: 'same-origin'},
+          {header: 'sec-fetch-mode', operation: 'set', value: 'navigate'},
+          {header: 'sec-fetch-dest', operation: 'set', value: 'document'},
+        ],
+      },
+      condition: {
+        initiatorDomains: [chrome.runtime.id],
+        resourceTypes: ['xmlhttprequest', 'other'],
+      },
+    }],
+  }).catch((err) => {
+    logger.error('syncExtensionHeaderRules error', err);
+  });
+};
+
+syncExtensionHeaderRules();
 
 chrome.omnibox.onInputEntered.addListener((query) => {
   openSearchPage(query);

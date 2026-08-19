@@ -35,6 +35,7 @@ const serializeError = require('serialize-error');
         method: fetchOptions.method,
         headers: fetchOptions.headers,
         body: fetchOptions.body,
+        credentials: 'include',
         signal: controller.signal
       });
 

@@ -132,7 +132,7 @@ class Options extends React.Component {
             {page}
           </div>
           <div className="author">
-            <a title="email: leonardspbox@gmail.com" href="mailto:leonardspbox@gmail.com">Anton</a>, 2016
+            <a href="https://github.com/Feverqwe/tSearch">tSearch</a> by Anton, 2016 &amp; fork reslear, 2026
           </div>
         </div>
         <ScrollTop/>

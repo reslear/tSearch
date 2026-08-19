@@ -1,6 +1,6 @@
 {
     "manifest_version": 3,
-    "minimum_chrome_version": "88",
+    "minimum_chrome_version": "101",
     "action": {
         "default_icon": {
             "19": "assets/icons/icon_19.png",
@@ -16,7 +16,7 @@
     },
     "options_ui": {"page": "index.html#/options", "open_in_tab": true},
     "optional_permissions": ["tabs"],
-    "permissions": ["storage", "contextMenus", "unlimitedStorage", "scripting"],
+    "permissions": ["storage", "contextMenus", "unlimitedStorage", "scripting", "declarativeNetRequestWithHostAccess"],
     "host_permissions": ["http://*/*", "https://*/*"],
     "omnibox": {
         "keyword" : "tms"
