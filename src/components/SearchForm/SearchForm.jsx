@@ -7,6 +7,21 @@ import PropTypes from 'prop-types';
 
 const debug = getLogger('SearchForm');
 
+const sanitizeAutosuggest = (Component) => {
+  if (!Component?.prototype || !Object.prototype.hasOwnProperty.call(Component.prototype, 'componentWillReceiveProps')) {
+    return Component;
+  }
+
+  if (!Object.prototype.hasOwnProperty.call(Component.prototype, 'UNSAFE_componentWillReceiveProps')) {
+    Component.prototype.UNSAFE_componentWillReceiveProps = Component.prototype.componentWillReceiveProps;
+  }
+
+  delete Component.prototype.componentWillReceiveProps;
+  return Component;
+};
+
+const PatchedAutosuggest = sanitizeAutosuggest(Autosuggest);
+
 @inject('rootStore')
 @observer
 class SearchForm extends React.Component {
@@ -86,7 +101,8 @@ class SearchForm extends React.Component {
     return (
       <div className="search-from">
         <form onSubmit={this.handleSubmit}>
-          <Autosuggest
+          <PatchedAutosuggest
+            inputProps={inputProps}
             theme={{
               input: 'input',
               suggestionsContainer: 'suggestions-container',
@@ -100,7 +116,6 @@ class SearchForm extends React.Component {
             shouldRenderSuggestions={this.shouldRenderSuggestions}
             getSuggestionValue={suggestion => suggestion}
             renderSuggestion={this.renderSuggestion}
-            inputProps={inputProps}
           />
           <button type="submit" className="submit">{chrome.i18n.getMessage('search')}</button>
         </form>

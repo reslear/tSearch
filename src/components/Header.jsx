@@ -18,6 +18,7 @@ class Header extends React.Component {
     const location = '/search?' + qs.stringify({
       query: query
     });
+
     this.props.history.push(location);
   };
 

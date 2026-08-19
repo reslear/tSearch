@@ -16,5 +16,6 @@
 /_locales/
 /tabFetch.js
 /.eslintcache
+release/
 
 .DS_Store

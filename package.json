@@ -2,14 +2,11 @@
   "name": "tms",
   "version": "1.0.0",
   "scripts": {
-    "buildExplorersJson": "node ./builder/buildExplorersJson.mjs",
-    "buildTrackersJson": "node ./builder/buildTrackersJson.mjs",
-    "compress": "node ./builder/compressDist.mjs",
-    "build:vite": "vite build --mode production",
-    "watch:vite": "vite build --mode development --watch",
-    "watch": "npm run watch:vite",
-    "build": "npm run build:vite",
-    "release": "npm run buildExplorersJson && npm run buildTrackersJson && npm run build:vite && npm run compress"
+    "build:data": "node ./builder/buildExplorersJson.mjs && node ./builder/buildTrackersJson.mjs",
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "typecheck": "tsc --noEmit",
+    "release": "pnpm run build:data && pnpm run build"
   },
   "dependencies": {
     "codemirror": "^5.47.0",
@@ -56,9 +53,10 @@
     "@babel/plugin-proposal-decorators": "^7.4.4",
     "@crxjs/vite-plugin": "^2.0.0-beta.30",
     "@vitejs/plugin-react": "^4.3.0",
-    "archiver": "^3.0.0",
     "less": "^3.9.0",
-    "vite": "^6.0.0",
-    "vite-plugin-static-copy": "^2.2.0"
+    "@types/node": "^22.10.0",
+    "typescript": "^5.6.3",
+    "vite-plugin-zip-pack": "^1.2.4",
+    "vite": "^6.0.0"
   }
 }

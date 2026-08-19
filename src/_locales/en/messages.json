@@ -323,9 +323,6 @@
     "enableProxy": {
         "message": "Enable proxy support"
     },
-    "doNotSendStatistics": {
-        "message": "Do not send statistics"
-    },
     "quickSearch": {
         "message": "Quick search"
     },

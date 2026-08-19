@@ -41,16 +41,28 @@ const TrackerSearchStore = types.model('TrackerSearchStore', {
     searchWrapper: flow(function* (searchFn) {
       const {id, queryHighlightMap, queryRateScheme} = self;
       const /**RootStore*/rootStore = getParentOfType(self, RootStore);
+      if (!isAlive(self) || !isAlive(rootStore)) {
+        return;
+      }
       const defineCategory = rootStore.options.options.defineCategory;
       const trackerHealth = rootStore.options.options.trackerHealth;
+      const tracker = self.tracker;
+      if (!tracker) {
+        throw new Error(`Tracker ${id} is not found`);
+      }
+      if (!isAlive(tracker)) {
+        return;
+      }
+
+      tracker.attach();
+      if (!isAlive(self)) {
+        tracker.deattach();
+        return;
+      }
       self.state = 'pending';
       self.authRequired = undefined;
       self.errorReason = undefined;
       try {
-        const tracker = self.tracker;
-        if (!tracker) {
-          throw new Error(`Tracker ${id} is not found`);
-        }
         const result = yield searchFn();
         if (!result) {
           throw new ErrorWithCode(`Search error: result is empty`, 'EMPTY_RESULT');
@@ -75,11 +87,19 @@ const TrackerSearchStore = types.model('TrackerSearchStore', {
         }
         return prepSearchResults(id, queryHighlightMap, queryRateScheme, result.results, defineCategory, urlSet);
       } catch (err) {
-        if (isAlive(self)) {
-          self.state = 'error';
-          self.errorReason = err && err.message ? err.message : String(err || 'Search error');
+        if (!isAlive(self)) {
+          return;
         }
-        if (err.code === 'AUTH_REQUIRED') {
+
+        const errorMessage = normalizeErrorMessage(err);
+        const recoverable = isRecoverableSearchError(err);
+        if (recoverable) {
+          setSearchErrorState(self, errorMessage);
+          return;
+        }
+
+        setSearchErrorState(self, errorMessage);
+        if (err && err.code === 'AUTH_REQUIRED') {
           if (isAlive(self)) {
             self.authRequired = {
               url: err.url
@@ -90,9 +110,13 @@ const TrackerSearchStore = types.model('TrackerSearchStore', {
           }
         } else {
           logger.error(`[${id}] searchWrapper error`, err);
-          if (trackerHealth && trackerHealth.disableTracker(id, self.errorReason)) {
+          if (isAlive(self) && trackerHealth && trackerHealth.disableTracker(id, errorMessage)) {
             rootStore.options.save();
           }
+        }
+      } finally {
+        if (isAlive(tracker)) {
+          tracker.deattach();
         }
       }
     }),
@@ -187,14 +211,33 @@ const SearchStore = types.model('SearchStore', {
   const urlSet = new Set();
   return {
     searchWrapper: flow(function* (serachFn) {
+      if (!isAlive(self)) {
+        return;
+      }
       self.state = 'pending';
       try {
         const /**RootStore*/rootStore = getParentOfType(self, RootStore);
+        if (!isAlive(rootStore)) {
+          return;
+        }
+        let hasRecoveredTrackers = false;
         const selectedTrackerIds = rootStore.profiles.prepSelectedTrackerIds.filter((trackerId) => {
           const trackerHealth = rootStore.options.options.trackerHealth;
-          if (!trackerHealth) return true;
+          if (!trackerHealth) {
+            return true;
+          }
+          const disableReason = trackerHealth.getTrackerDisableReason(trackerId);
+          if (disableReason && isRecoverableSearchError(disableReason)) {
+            if (trackerHealth.enableTracker(trackerId)) {
+              hasRecoveredTrackers = true;
+            }
+            return true;
+          }
           return !trackerHealth.isTrackerDisabled(trackerId);
         });
+        if (hasRecoveredTrackers) {
+          yield rootStore.options.save();
+        }
 
         let page = null;
         if (self.pages.length && rootStore.options.options.singleResultTable) {
@@ -367,6 +410,58 @@ const prepSearchResults = (trackerId, queryHighlightMap, queryRateScheme, result
       return true;
     }
   });
+};
+
+const normalizeErrorMessage = (error) => {
+  if (error === null || error === undefined) {
+    return 'Search error';
+  }
+  if (error.message) {
+    return String(error.message);
+  }
+  if (typeof error === 'string') {
+    return error;
+  }
+  return String(error);
+};
+
+const setSearchErrorState = (trackerSearch, message, withReason = true) => {
+  try {
+    if (!isAlive(trackerSearch)) {
+      return;
+    }
+
+    trackerSearch.state = 'error';
+    if (withReason) {
+      trackerSearch.errorReason = message;
+    }
+  } catch (err) {
+    const messageText = normalizeErrorMessage(err).toLowerCase();
+    const isStateTreeError = messageText.indexOf('not part of a state tree') !== -1;
+    if (!isStateTreeError) {
+      throw err;
+    }
+  }
+};
+
+const isRecoverableSearchError = (error) => {
+  if (!error) {
+    return false;
+  }
+
+  const errorMessage = normalizeErrorMessage(error).toLowerCase();
+  const errorCode = String(error.code || '').toUpperCase();
+
+  if (['EMPTY_RESULT', 'EABORT', 'ABORTED'].indexOf(errorCode) !== -1) {
+    return true;
+  }
+
+  return errorMessage.indexOf('destroyed') !== -1 ||
+    errorMessage.indexOf('response is empty') !== -1 ||
+    errorMessage.indexOf('window is closed') !== -1 ||
+    errorMessage.indexOf('search error: result is empty') !== -1 ||
+    errorMessage.indexOf('not a child') !== -1 ||
+    errorMessage.indexOf('state tree') !== -1;
 };
 
 export default SearchStore;

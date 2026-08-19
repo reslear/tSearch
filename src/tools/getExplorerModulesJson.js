@@ -1,4 +1,4 @@
-import explorerModulesJson from '../../src/explorers.json';
+import explorerModulesJson from '../explorers.json';
 
 let cache = null;
 

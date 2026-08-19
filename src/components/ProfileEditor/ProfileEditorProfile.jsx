@@ -22,9 +22,6 @@ class ProfileEditorProfile extends React.Component {
 
   componentDidMount() {
     document.title = getTitle(`Edit profile "${this.profileEditorProfileStore.name}"`);
-    if (window.ga) {
-      window.ga('send', 'pageview', {page: location.href, title: document.title});
-    }
   }
 
   state = {

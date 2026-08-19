@@ -1,7 +1,7 @@
 import getExploreModuleCodeMeta from "./getExploreModuleCodeMeta";
 
 const loadLocalExplorerModule = id => {
-  return fetch('./explorerModules/' + id + '.js').then(response => {
+  return fetch(chrome.runtime.getURL('src/explorerModules/' + id + '.js')).then(response => {
     return response.text();
   }).then(response => {
     return {

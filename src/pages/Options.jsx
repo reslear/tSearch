@@ -32,9 +32,6 @@ class Options extends React.Component {
 
   componentDidMount() {
     document.title = getTitle('Options');
-    if (window.ga) {
-      window.ga('send', 'pageview', {page: location.href, title: document.title});
-    }
   }
 
   /**@return OptionsStore*/
@@ -79,7 +76,6 @@ class Options extends React.Component {
             <OptionCheckbox name={'defineCategory'}/>
             <OptionCheckbox name={'requestQueryDescription'}/>
             <OptionCheckbox name={'singleResultTable'}/>
-            <OptionCheckbox name={'doNotSendStatistics'}/>
           </div>
         );
         break;

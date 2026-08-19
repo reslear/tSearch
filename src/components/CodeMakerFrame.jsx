@@ -1,8 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import exKitRequest from "../tools/exKitRequest";
-import exKitGetDoc from "../tools/exKitGetDoc";
-import getDoc5 from "../sandbox/getDoc5";
+import getSandboxDoc from "../sandbox/getSandboxDoc";
 import getLogger from "../tools/getLogger";
 import getNodePath from "../tools/getNodePath";
 import {sizzleQuerySelector, sizzleQuerySelectorAll} from "../tools/sizzleQuery";
@@ -61,8 +60,8 @@ class CodeMakerFrame extends React.Component {
     return Promise.resolve().then(() => {
       return exKitRequest(this.reqTracker, options);
     }).then(response => {
-      const doc = exKitGetDoc(response.body, response.url);
-      const newFrameDoc = getDoc5(response.body, response.url, this.frame.contentDocument);
+      const doc = getSandboxDoc(response.body, response.url);
+      const sourceRoot = doc.body || doc.documentElement;
 
       const kitStyle = document.createElement('style');
       kitStyle.textContent = `
@@ -73,22 +72,14 @@ class CodeMakerFrame extends React.Component {
         box-shadow: 0 0 3px red, inset 0 0 3px red !important;
       }`;
 
-      if (newFrameDoc.head) {
-        newFrameDoc.head.appendChild(kitStyle);
-      } else
-      if (newFrameDoc.body) {
-        newFrameDoc.body.appendChild(kitStyle);
-      } else {
-        newFrameDoc.appendChild(kitStyle);
-      }
+      this.frame.appendChild(kitStyle);
 
-      const frameDoc = this.frame.contentDocument.documentElement.parentNode;
+      const frameDoc = this.frame;
       frameDoc.textContent = '';
-      while (frameDoc.childNodes.length) {
-        frameDoc.removeChild(frameDoc.firstChild);
-      }
-      while (newFrameDoc.childNodes.length) {
-        frameDoc.appendChild(newFrameDoc.firstChild);
+      if (sourceRoot) {
+        while (sourceRoot.firstChild) {
+          frameDoc.appendChild(sourceRoot.firstChild.cloneNode(true));
+        }
       }
 
       this.doc = doc;
@@ -146,7 +137,7 @@ class CodeMakerFrame extends React.Component {
     }
 
     return [
-      <iframe key={'frame'} ref={this.refFrame} sandbox="allow-same-origin allow-scripts"/>,
+      <div key={'frame'} ref={this.refFrame} className="code-maker-frame"/>,
       selectMode
     ];
   }
@@ -201,6 +192,8 @@ class CodeMakerFrameSelectMode extends React.Component {
   }
 
   handleClick = e => {
+    e.preventDefault();
+    e.stopPropagation();
     const node = e.target;
     if (node.nodeType === 1) {
       const path = this.getPath(node);
@@ -209,6 +202,8 @@ class CodeMakerFrameSelectMode extends React.Component {
   };
 
   handleMouseOver = e => {
+    e.preventDefault();
+    e.stopPropagation();
     const node = e.target;
     if (node.nodeType === 1) {
       this.props.hideSelect();

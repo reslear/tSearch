@@ -1,6 +1,4 @@
 import getLogger from "./getLogger";
-import tracker from "./tracker";
-import {BUILD_ENV} from './buildEnv';
 
 const logger = getLogger('errorTrackerUi');
 
@@ -73,11 +71,7 @@ class ErrorTracker {
    * @param {Object} params
    */
   track(params) {
-    if (BUILD_ENV.mode !== 'development') {
-      tracker.track(params);
-    } else {
-      logger.debug('Skip track error', params);
-    }
+    logger.debug('track error', params);
   }
 
   updateRenameMap() {

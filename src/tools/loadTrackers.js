@@ -11,7 +11,7 @@ const loadTrackers = () => {
     'opentorrent', 'piratebit', 'rgfootball', 'rutor',
     'rutracker', 'tapochek', 'thepiratebay'
   ].map(id => {
-    return fetch('./trackers/' + id + '.js').then(response => {
+    return fetch(chrome.runtime.getURL('src/trackers/' + id + '.js')).then(response => {
       return response.text();
     }).then(response => {
       return {

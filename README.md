@@ -1,66 +1,41 @@
-# tSearch — Torrents MultiSearch (MV3)
+# tSearch — Multi-Search Torrents (MV3)
 
-A browser extension that searches multiple trackers from a single UI. The project is updated and fully supports Manifest V3.
+Chrome extension for searching multiple torrent trackers from one interface. Built for Manifest V3 and powered by Vite.
 
-Overview
-- Purpose: unified search, filtering, and viewing across multiple sources.
-- MV3 support: background service worker, `chrome.action`, `chrome.scripting`, modern CSP.
-- UI: popup, options page, and a sandbox to run modules.
-- Fork: this project is a fork of https://github.com/Feverqwe/tSearch
+## Install / Run
 
-Screenshots
-![Main UI](media/screen1.png)
-![Search Results](media/screen2.png)
-
-Build
-- Requires Node.js and npm.
+- Requirements: Node.js + pnpm.
 - Commands:
-  - `npm run build` — dev build (with sourcemaps, no minification).
-  - `npm run release` — build trackers/json, options, Vite production build, and zip archive.
-- Output: `dist/`.
-- Install in Chrome: “Load unpacked” and select `dist/dist`.
+  - `pnpm run build:data` — refresh `explorers.json` and `trackers.json`.
+- `pnpm run build` — production build to `dist/` and archive to `release/tms.zip` (via CRXJS + `vite-plugin-zip-pack`).
+- `pnpm run build:data && pnpm run build` — full release pipeline (refresh data -> typecheck -> build).
+- `pnpm run typecheck` — run TypeScript check for build configs (`vite.config.ts`, `manifest.config.ts`).
+- `pnpm run dev` — run Vite development mode.
+- `pnpm run release` — `build:data` and `build`.
 
-Compatibility
-- Chrome 88+ (Manifest V3).
+## Chrome installation
 
-Notes
-- Analytics uses the Measurement Protocol from the background process (no external scripts loaded).
-- Page injections use `chrome.scripting.executeScript` (MV3).
+Use **Load unpacked** and select the `dist` folder.
 
-License
-- See `LICENSE.md`.
+## Compatibility
 
-___
+- Chrome 88+ (Manifest V3)
 
-Браузерное расширение для удобного поиска по нескольким трекерам с единого интерфейса. Проект обновлён и полностью поддерживает Manifest V3.
+## Screenshots
 
-Основное
-- Назначение: единый поиск, фильтрация и просмотр результатов по множеству источников.
-- Поддержка MV3: фоновая логика на service worker, `chrome.action`, `chrome.scripting`, актуальный CSP.
-- Интерфейс: popup, страница настроек и песочница для исполнения модулей.
-- Форк: этот проект — форк https://github.com/Feverqwe/tSearch
+| ![Search result screen](media/screen1.png) | ![Tracker list and options](media/screen2.png) |
+| --- | --- |
 
-Сборка
-- Требуется Node.js и npm.
-- Команды:
-  - `npm run build` — сборка для разработки (с sourcemap, без минификации).
-  - `npm run release` — сборка данных, production Vite-сборка и zip-архивация.
-- Готовые файлы: `dist/`.
-- Установка в Chrome: «Load unpacked» и выбрать `dist/dist`.
+## Notes
 
-Совместимость
-- Chrome 88+ (Manifest V3).
+- Request processing and tracker updates run in the background process (no content scripts).
+- Page injections use `chrome.scripting.executeScript`.
 
-Примечания
-- Аналитика реализована через Measurement Protocol из фонового процесса без загрузки внешних скриптов.
-- Инъекции на страницах выполняются через `chrome.scripting.executeScript` (MV3).
+## License
 
-Лицензия
-- См. `LICENSE.md`.
+See `LICENSE.md`.
 
-___
+## Credits
 
-## Copyright & Credits
-
-Original project: [tSearch](https://github.com/Feverqwe/tSearch) by Anton, 2016  
-Fork: [tSearch-manifestv3](https://github.com/Feverqwe/tSearch) & reslear, 2026
+- Original project: [tSearch](https://github.com/Feverqwe/tSearch) by Anton, 2016.
+- Fork: [tSearch-manifestv3](https://github.com/Feverqwe/tSearch) by reslear, 2026.

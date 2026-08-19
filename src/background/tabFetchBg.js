@@ -320,7 +320,7 @@ class Request extends EventEmitter {
       if (sessionId !== this.sessionIndex) return;
 
       return executeScriptPromise(this.originTab.tabId, {
-        file: 'tabFetch.js',
+        file: 'src/tabFetch.js',
         runAt: 'document_start',
       });
     }).then(() => {

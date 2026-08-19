@@ -26,9 +26,6 @@ class ProfileEditorProfiles extends React.Component {
 
   componentDidMount() {
     document.title = getTitle('Edit profiles');
-    if (window.ga) {
-      window.ga('send', 'pageview', {page: location.href, title: document.title});
-    }
   }
 
   /**@return ProfileEditorStore*/
@@ -78,7 +75,11 @@ class ProfileEditorProfiles extends React.Component {
     e.preventDefault();
     const id = createProfileId();
     this.profileEditorStore.createProfile(id);
-    this.props.history.push(`/profileEditor/${id}`);
+    const location = `/profileEditor/${id}`;
+
+    if (this.props.history?.location?.pathname !== location) {
+      this.props.history.push(location);
+    }
   };
 
   render() {
@@ -136,7 +137,11 @@ class ProfileEditorProfileItem extends React.Component {
       e.target === this.item ||
       e.target.classList.contains('item__name')
     ) {
-      this.props.history.push(`/profileEditor/${this.profileEditorProfileStore.id}`);
+      const location = `/profileEditor/${this.profileEditorProfileStore.id}`;
+
+      if (this.props.history?.location?.pathname !== location) {
+        this.props.history.push(location);
+      }
     }
   };
 

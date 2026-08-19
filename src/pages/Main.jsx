@@ -9,9 +9,6 @@ import getTitle from "../tools/getTitle";
 class Main extends React.Component {
   componentDidMount() {
     document.title = getTitle();
-    if (window.ga) {
-      window.ga('send', 'pageview', {page: location.href, title: document.title});
-    }
   }
 
   render() {

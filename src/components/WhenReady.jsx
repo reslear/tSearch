@@ -27,44 +27,6 @@ class WhenReady extends React.Component {
   }
 
   render() {
-    let whenOptionsReady = null;
-    if (this.rootStore.options.state === 'done') {
-      whenOptionsReady = (
-        <WhenOptionsReady/>
-      );
-    }
-
-    return (
-      <>
-        {whenOptionsReady}
-      </>
-    );
-  }
-}
-
-@inject('rootStore')
-class WhenOptionsReady extends React.Component {
-  static propTypes = {
-    rootStore: PropTypes.object,
-  };
-
-  /**@return RootStore*/
-  get rootStore() {
-    return this.props.rootStore;
-  }
-
-  /**@return OptionsStore*/
-  get optionsStore() {
-    return this.props.rootStore.options;
-  }
-
-  componentDidMount() {
-    if (!this.optionsStore.options.doNotSendStatistics) {
-      this.rootStore.analytics.init();
-    }
-  }
-
-  render() {
     return null;
   }
 }

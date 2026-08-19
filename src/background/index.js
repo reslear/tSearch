@@ -12,8 +12,6 @@ import storageGet from "../tools/storageGet";
 import storageSet from "../tools/storageSet";
 import TabFetchBg from "./tabFetchBg";
 import migrate from "../tools/migrate";
-import errorTracker from "../tools/errorTracker";
-import getUserId from "../tools/getUserId";
 import jsonCodeToUserscript from "../tools/jsonCodeToUserscript";
 import setCodeMeta from "../tools/setCodeMeta";
 import {BUILD_ENV} from "../tools/buildEnv";
@@ -131,11 +129,6 @@ chrome.runtime.onMessage.addListener(function (message, sender, response) {
           throw new Error('TabFetchBg is not exists');
         }
       });
-      break;
-    }
-    case 'track': {
-      const {params} = message;
-      promise = track(params);
       break;
     }
     case 'abortSearch': {
@@ -458,37 +451,6 @@ const getCodeAndMetaFromUrl = (url, type = 'tracker') => {
       code = setCodeMeta(code, meta);
     }
     return {meta, code};
-  });
-};
-
-const track = params => {
-  return getUserId().then(uuid => {
-    const defaultParams = {
-      v: 1,
-      ul: navigator.language,
-      tid: 'UA-10717861-38',
-      cid: uuid,
-
-      an: 'tms',
-      aid: 'tms-v3',
-      av: BUILD_ENV.version,
-    };
-
-    return Object.assign({}, defaultParams, params);
-  }).then(params => {
-    logger.debug('track', params);
-
-    return fetch('https://www.google-analytics.com/collect', {
-      method: 'POST',
-      headers: {
-        'Content-Type': ' application/x-www-form-urlencoded'
-      },
-      body: qs.stringify(params)
-    }).then(response => {
-      if (!response.ok) {
-        throw new ErrorWithCode(`${response.status}: ${response.statusText}`, response.status);
-      }
-    });
   });
 };
 

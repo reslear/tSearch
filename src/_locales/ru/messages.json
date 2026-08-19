@@ -323,9 +323,6 @@
   "enableProxy": {
     "message": "Включить поддержку прокси"
   },
-  "doNotSendStatistics": {
-    "message": "Не отправлять статистику"
-  },
   "quickSearch": {
     "message": "Быстрый поиск"
   },

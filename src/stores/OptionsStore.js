@@ -96,7 +96,6 @@ const ExplorerSectionsStore = types.model('ExplorerSectionsStore', {
  * @property {boolean} [defineCategory]
  * @property {boolean} [singleResultTable]
  * @property {boolean} [requestQueryDescription]
- * @property {boolean} [doNotSendStatistics]
  * @property {boolean} [originalPosterName]
  * @property {string} [kpFolderId]
  * @property {ExplorerSectionsStore} [explorerSections]
@@ -116,7 +115,6 @@ const OptionsValueStore = types.model('OptionsValueStore', {
   defineCategory: types.optional(types.boolean, true),
   singleResultTable: types.optional(types.boolean, false),
   requestQueryDescription: types.optional(types.boolean, true),
-  doNotSendStatistics: types.optional(types.boolean, false),
   originalPosterName: types.optional(types.boolean, false),
   kpFolderId: types.optional(types.string, '1'),
   explorerSections: types.optional(ExplorerSectionsStore, {}),
@@ -186,7 +184,7 @@ const OptionsStore = types.model('OptionsStore', {
   };
 }).views(self => {
   const storageChangeListener = (changes, namespace) => {
-    if (self.state !== 'done') return;
+    if (!isAlive(self) || !self.options || self.state !== 'done') return;
 
     if (namespace === 'sync') {
       const change = changes.options;
