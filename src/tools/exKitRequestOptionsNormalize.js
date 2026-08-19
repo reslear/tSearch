@@ -1,5 +1,33 @@
 import qs from './query-string';
 
+/**
+ * Trackers may leave headers unset (null), pass a plain object, or use the
+ * legacy [{name, value}] form. `new Headers(null)` throws a TypeError in
+ * Chrome, so normalize everything to a valid HeadersInit first.
+ */
+const toHeadersInit = (rawHeaders) => {
+  if (!rawHeaders) {
+    return undefined;
+  }
+
+  if (Array.isArray(rawHeaders)) {
+    return rawHeaders.reduce((result, item) => {
+      if (Array.isArray(item)) {
+        result.push([item[0], item[1]]);
+      } else if (item && typeof item === 'object' && 'name' in item) {
+        result.push([item.name, item.value]);
+      }
+      return result;
+    }, []);
+  }
+
+  if (typeof rawHeaders !== 'object') {
+    return undefined;
+  }
+
+  return rawHeaders;
+};
+
 const exKitRequestOptionsNormalize = options => {
   if (typeof options !== 'object') {
     options = {url: options};
@@ -23,7 +51,13 @@ const exKitRequestOptionsNormalize = options => {
     delete options.data;
   }
 
-  const headers = new Headers(options.headers);
+  // Trackers always pass a body string, empty for GET searches. `fetch` rejects
+  // any non-null body on GET/HEAD, so strip it before the request is built.
+  if (!options.body || options.method === 'GET' || options.method === 'HEAD') {
+    delete options.body;
+  }
+
+  const headers = new Headers(toHeadersInit(options.headers));
 
   if (options.body) {
     if (!headers.has('Content-Type')) {
