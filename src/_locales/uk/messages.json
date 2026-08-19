@@ -131,6 +131,15 @@
    "filter_withoutList": {
       "message": "Без списку"
    },
+   "trackers_selected": {
+      "message": "Вибрано"
+   },
+   "trackers_select_all": {
+      "message": "Вибрати все"
+   },
+   "trackers_unselect_all": {
+      "message": "Зняти вибір"
+   },
    "ggGamesNew": {
       "message": "Ігри: Нові"
    },

@@ -335,6 +335,15 @@
     "filter_selected": {
         "message": "Selected"
     },
+    "trackers_selected": {
+        "message": "Selected"
+    },
+    "trackers_select_all": {
+        "message": "Select all"
+    },
+    "trackers_unselect_all": {
+        "message": "Unselect all"
+    },
     "external_trackers": {
         "message": "External"
     },

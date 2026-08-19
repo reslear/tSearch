@@ -134,6 +134,15 @@
   "filter_withoutList": {
     "message": "Без спісу"
   },
+  "trackers_selected": {
+    "message": "Абраны"
+  },
+  "trackers_select_all": {
+    "message": "Абраць усё"
+  },
+  "trackers_unselect_all": {
+    "message": "Зняць вылучэнне"
+  },
   "fetchMeta": {
     "message": "Атрымаць метаданыя"
   },

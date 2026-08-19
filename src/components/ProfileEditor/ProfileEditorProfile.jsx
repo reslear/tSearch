@@ -118,6 +118,35 @@ class ProfileEditorProfile extends React.Component {
     this.onCloseSourcesDialog();
   };
 
+  handleSelectAllTrackers = (e) => {
+    e.preventDefault();
+
+    const currentTrackers = this.profileEditorProfileStore.categoryTrackers;
+    const trackerIds = currentTrackers.map(tracker => tracker.id);
+    const selectedTrackerIds = new Set(this.profileEditorProfileStore.selectedTrackerIds);
+    const nextSelectedTrackerIds = this.profileEditorProfileStore.selectedTrackerIds.slice(0);
+
+    trackerIds.forEach((trackerId) => {
+      if (!selectedTrackerIds.has(trackerId)) {
+        nextSelectedTrackerIds.push(trackerId);
+      }
+    });
+
+    this.profileEditorProfileStore.setSelectedTrackerIds(nextSelectedTrackerIds);
+  };
+
+  handleUnselectAllTrackers = (e) => {
+    e.preventDefault();
+
+    const currentTrackerIds = this.profileEditorProfileStore.categoryTrackers.map(tracker => tracker.id);
+    const currentTrackerIdsSet = new Set(currentTrackerIds);
+    const nextSelectedTrackerIds = this.profileEditorProfileStore.selectedTrackerIds.filter((trackerId) => {
+      return !currentTrackerIdsSet.has(trackerId);
+    });
+
+    this.profileEditorProfileStore.setSelectedTrackerIds(nextSelectedTrackerIds);
+  };
+
   repositoryInput = null;
   refRepositoryInput = (element) => {
     this.repositoryInput = element;
@@ -180,8 +209,16 @@ class ProfileEditorProfile extends React.Component {
       <ProfileEditorFilterButton key={`category-${'store'}`} title={chrome.i18n.getMessage('external_trackers')} onClick={this.handleStoreClick} isActive={this.state.showStore} type={'store'}/>
     );
 
+    const currentTrackers = this.profileEditorProfileStore.categoryTrackers;
+    const visibleTrackerIdsSet = new Set(currentTrackers.map(tracker => tracker.id));
+    const selectedVisibleTrackersCount = this.profileEditorProfileStore.selectedTrackerIds.reduce((count, trackerId) => {
+      return visibleTrackerIdsSet.has(trackerId) ? count + 1 : count;
+    }, 0);
+    const currentTrackersCount = currentTrackers.length;
+
     let sourcesDialog = null;
     let listControls = [];
+    let selectionHelpers = null;
     let trackerList = null;
     if (this.state.showStore) {
       trackerList = (
@@ -241,6 +278,19 @@ class ProfileEditorProfile extends React.Component {
       listControls.push(
         <button key={'view'} onClick={this.handleShowOptions} className={showOptionsClassList.join(' ')} title={chrome.i18n.getMessage('advanced_options')}/>
       );
+      selectionHelpers = (
+        <div key={'selectionHelpers'} className="filter__helpers">
+          <span className="selection_helpers__counter">
+            {chrome.i18n.getMessage('trackers_selected')}: {selectedVisibleTrackersCount}/{currentTrackersCount}
+          </span>
+          <button onClick={this.handleSelectAllTrackers}
+                  disabled={currentTrackersCount === 0}
+                  className="styled-button">{chrome.i18n.getMessage('trackers_select_all')}</button>
+          <button onClick={this.handleUnselectAllTrackers}
+                  disabled={selectedVisibleTrackersCount === 0}
+                  className="styled-button">{chrome.i18n.getMessage('trackers_unselect_all')}</button>
+        </div>
+      );
     }
 
     return (
@@ -260,6 +310,9 @@ class ProfileEditorProfile extends React.Component {
               />
             </div>
           </div>
+          {selectionHelpers ? (
+            <div className="manager__sub_header sub_header__helpers">{selectionHelpers}</div>
+          ) : null}
           {trackerList}
           <div className="manager__footer">
             {listControls}

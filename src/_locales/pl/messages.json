@@ -134,6 +134,15 @@
   "filter_withoutList": {
     "message": "Bez listy"
   },
+  "trackers_selected": {
+    "message": "Wybrane"
+  },
+  "trackers_select_all": {
+    "message": "Zaznacz wszystko"
+  },
+  "trackers_unselect_all": {
+    "message": "Odznacz wszystko"
+  },
   "fetchMeta": {
     "message": "Pobierz metadane"
   },

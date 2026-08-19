@@ -335,6 +335,15 @@
   "filter_selected": {
     "message": "Выбранные"
   },
+  "trackers_selected": {
+    "message": "Выбрано"
+  },
+  "trackers_select_all": {
+    "message": "Выделить все"
+  },
+  "trackers_unselect_all": {
+    "message": "Снять выделение"
+  },
   "historyEmpty": {
     "message": "Здесь пусто, пока..."
   },
